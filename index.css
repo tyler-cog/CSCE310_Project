@@ -1,0 +1,126 @@
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}  
+
+.surface {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.maroonBar {
+    background-color: #500000;
+    height: 15%;
+    min-height: 70px;
+}
+
+img {
+    height: 85%;
+    min-height: 50px;
+    margin-left: 50px;
+}
+
+.greyBack {
+    background-color: #C8C8C8;
+    height: 85%;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loginBox {
+    background-color: #f4f4f4;
+    background: linear-gradient(0deg, rgba(200,200,200,1) 5%, rgba(244,244,244,1) 30%);
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80%;
+    min-height: 400px;
+    width: 30%;
+    min-width: 350px;
+}
+
+.loginWord {
+    color: #7c0303;
+    font-size: 35px;
+    height: 35px;
+    font-family: 'Tungsten', sans-serif;
+    font-weight: 50;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.maroonDivider {
+    height: 2px;
+    background-color: #7c0303;
+    width: 95%;
+}
+
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    padding-top: 70px;
+    width: 90%;
+}
+
+label {
+    margin-top: 20px;
+    margin-left: 8px;
+    color: #7c0303;
+    font-size: 15px;
+    font-family: 'Tungsten', sans-serif;
+}
+
+.inputField {
+    outline: none;
+    height: 35px;
+    border-radius: 10px;
+    padding-left: 10px;
+    border-width: 1px;
+    border-color: #C8C8C8;
+}
+
+.passwordField {
+    outline: none;
+    height: 35px;
+    border-radius: 10px;
+    padding-left: 10px;
+    border-width: 1px;
+    border-color: #C8C8C8;
+}
+
+.submitBtn {
+    margin-top: 10px;
+    margin-bottom: 60px;
+    background-color: #500000;
+    color: white;
+    border-radius: 15px;
+    font-size: 18px;
+    font-family: 'Tungsten', sans-serif;
+    border: none;
+    outline: none;
+    width: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+a {
+    margin-top: 10px;
+    font-family: 'Tungsten', sans-serif;
+    font-size: 14px;
+}
+
+.greyDivider {
+    height: 1px;
+    background-color: grey;
+    width: 95%;
+}
