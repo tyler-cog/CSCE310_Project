@@ -1,3 +1,10 @@
+<?php
+    include "connection.php";
+
+    // Queries go here
+
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
