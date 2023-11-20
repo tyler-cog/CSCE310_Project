@@ -1,10 +1,3 @@
-<?php
-    include "connection.php"; // imports everything from connection.php
-
-    // Queries go here
-
-?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +16,58 @@
             <div class="loginBox">
                 <p class="loginWord"> LOGIN </p>
                 <div class="maroonDivider"></div>
-                <form class="loginForm">
+                <form class="loginForm" action="index.php" method="POST">
+                    <?php
+                        include "connection.php"; // imports everything from connection.php
+
+                        $username = "";
+                        $password = "";
+                        $wrong = false;
+
+                        if(!empty($_POST["username"]) && !empty($_POST["password"])){
+
+                            // Sets username and password from form
+                            $username = $_POST["username"];
+                            $password = $_POST["password"];
+
+                            $sql_query = "SELECT * FROM `user` WHERE `Username` = '$username'";
+
+                            $login_result = $db_conn->query($sql_query);
+
+                            if (!$login_result) {
+                                die("Query failed: " . $conn->error);
+                            }
+                            
+                            // If the result of the query is nothing
+                            if ($login_result->num_rows == 0){
+                                echo "Incorrect Username or Password";
+                            }
+
+                            // Loops through all the data in query (in this case, just does it once)
+                            while ($row = $login_result->fetch_assoc()) {
+                                // Do something with each row of data
+
+                                // If password is correct
+                                if ($password == $row["Password"]){
+
+                                    if ($row["User_Type"] == "Student") {
+                                        header("Location: StudentHomePage.php");
+                                        exit();
+                                    }
+
+                                    if ($row["User_Type"] == "Admin") {
+                                        header("Location: AdminHomePage.php");
+                                        exit();
+                                    }
+                                }
+
+                                // If password is wrong
+                                else {
+                                    echo "Incorrect Username or Password";
+                                }
+                            }
+                        }
+                    ?>
                     <label>Username</label>
                     <input class="inputField" type="text" name="username">
                     <label>Password</label>
