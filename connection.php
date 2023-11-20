@@ -21,6 +21,6 @@
     7. Click on "Admin"
     8. On your local phpMyAdmin, create a new database named "id21516113_cybersecurityclub_db"
     9. Click on the newly made database and on the top bar, click on Import
-    10. Select the downloaded sql file and press Go below
+    10. Select the downloaded sql file and press Import below
     */
 ?>
