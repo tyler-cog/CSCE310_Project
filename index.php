@@ -1,5 +1,5 @@
 <?php
-    include "connection.php";
+    include "connection.php"; // imports everything from connection.php
 
     // Queries go here
 
