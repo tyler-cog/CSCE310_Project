@@ -20,56 +20,35 @@
                     <?php
                         session_start();
                         include "connection.php"; // imports everything from connection.php
+                        include "loginHelper.php"; // imports helper functions
 
                         $username = "";
                         $password = "";
-                        $wrong = false;
 
                         if(!empty($_POST["username"]) && !empty($_POST["password"])){
-
                             // Sets username and password from form
                             $username = $_POST["username"];
                             $password = $_POST["password"];
 
-                            $sql_query = "SELECT * FROM `user` WHERE `Username` = '$username'";
+                            // Checks if login is correct
+                            if (isValidLogin($username, $password)){
 
-                            $login_result = $db_conn->query($sql_query);
+                                // checks if student or admin
+                                if (userType($username) == "Student"){
+                                    $_SESSION['username'] = $username;
+                                    header("Location: StudentHomePage.php");
+                                    exit();
+                                }
 
-                            if (!$login_result) {
-                                die("Query failed: " . $conn->error);
+                                else if (userType($username) == "Admin"){
+                                    $_SESSION['username'] = $username;
+                                    header("Location: AdminHomePage.php");
+                                    exit();
+                                }
                             }
-                            
-                            // If the result of the query is nothing
-                            if ($login_result->num_rows == 0){
+
+                            else {
                                 echo "Incorrect Username or Password";
-                            }
-
-                            // Loops through all the data in query (in this case, just does it once)
-                            while ($row = $login_result->fetch_assoc()) {
-                                // Do something with each row of data
-
-                                // If password is correct
-                                if ($password == $row["Password"]){
-
-                                    if ($row["User_Type"] == "Student") {
-                                        $_SESSION['username'] = $username;
-                                        $_SESSION['password'] = $password;
-                                        header("Location: StudentHomePage.php");
-                                        exit();
-                                    }
-
-                                    if ($row["User_Type"] == "Admin") {
-                                        $_SESSION['username'] = $username;
-                                        $_SESSION['password'] = $password;
-                                        header("Location: AdminHomePage.php");
-                                        exit();
-                                    }
-                                }
-
-                                // If password is wrong
-                                else {
-                                    echo "Incorrect Username or Password";
-                                }
                             }
                         }
                     ?>
