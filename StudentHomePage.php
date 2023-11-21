@@ -1,3 +1,11 @@
+<?php
+    session_start();
+    $username = $_SESSION['username'];
+    echo $username . " Student Homepage";
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +15,6 @@
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-   <div> Student Homepage </div>
+
 </body>
 </html>

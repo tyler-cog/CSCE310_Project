@@ -1,3 +1,9 @@
+<?php
+    session_start();
+    $username = $_SESSION['username'];
+    echo $username . " Admin Homepage";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

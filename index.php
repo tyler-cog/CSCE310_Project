@@ -18,6 +18,7 @@
                 <div class="maroonDivider"></div>
                 <form class="loginForm" action="index.php" method="POST">
                     <?php
+                        session_start();
                         include "connection.php"; // imports everything from connection.php
 
                         $username = "";
@@ -51,11 +52,15 @@
                                 if ($password == $row["Password"]){
 
                                     if ($row["User_Type"] == "Student") {
+                                        $_SESSION['username'] = $username;
+                                        $_SESSION['password'] = $password;
                                         header("Location: StudentHomePage.php");
                                         exit();
                                     }
 
                                     if ($row["User_Type"] == "Admin") {
+                                        $_SESSION['username'] = $username;
+                                        $_SESSION['password'] = $password;
                                         header("Location: AdminHomePage.php");
                                         exit();
                                     }
