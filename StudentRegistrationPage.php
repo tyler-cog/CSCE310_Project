@@ -1,11 +1,3 @@
-<?php
-    session_start(); // Allows session variables to be used
-    $username = $_SESSION['username'];
-    echo $username . " Student Homepage";
-?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

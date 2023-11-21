@@ -18,9 +18,9 @@
                 <div class="maroonDivider"></div>
                 <form class="loginForm" action="index.php" method="POST">
                     <?php
-                        session_start();
                         include "connection.php"; // imports everything from connection.php
                         include "loginHelper.php"; // imports helper functions
+                        session_start(); // Allows session variables to be used
 
                         $username = "";
                         $password = "";
@@ -31,17 +31,17 @@
                             $password = $_POST["password"];
 
                             // Checks if login is correct
-                            if (isValidLogin($username, $password)){
+                            if (isValidUsernameLogin($username, $password)){
 
                                 // checks if student or admin
                                 if (userType($username) == "Student"){
-                                    $_SESSION['username'] = $username;
+                                    $_SESSION['username'] = $username; // Saves to session variable
                                     header("Location: StudentHomePage.php");
                                     exit();
                                 }
 
                                 else if (userType($username) == "Admin"){
-                                    $_SESSION['username'] = $username;
+                                    $_SESSION['username'] = $username; // Saves to session variable
                                     header("Location: AdminHomePage.php");
                                     exit();
                                 }
