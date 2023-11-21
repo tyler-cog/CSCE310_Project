@@ -21,9 +21,6 @@
                         include "loginHelper.php"; // imports helper functions
                         session_start(); // Allows session variables to be used
 
-                        $username = "";
-                        $password = "";
-
                         if(!empty($_POST["username"]) && !empty($_POST["password"])){
                             // Sets username and password from form
                             $username = $_POST["username"];
