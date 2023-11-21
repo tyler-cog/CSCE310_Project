@@ -1,6 +1,6 @@
 <?php
     function isValidUsernameLogin($username, $password){
-        include "connection.php";
+        include "../connection.php";
         $sql_query = "SELECT * FROM `user` WHERE `Username` = '$username'";
         $result = $db_conn->query($sql_query);
 
@@ -30,7 +30,7 @@
     }
 
     function userType($username){
-        include "connection.php";
+        include "../connection.php";
         $sql_query = "SELECT * FROM `user` WHERE `Username` = '$username'";
         $result = $db_conn->query($sql_query);
 
