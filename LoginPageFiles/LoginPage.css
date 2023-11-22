@@ -61,16 +61,38 @@ img {
     width: 95%;
 }
 
+.noError {
+    height: 50px;
+}
+
+.withError {
+    margin-top: px;
+    display: flex;
+    height: 50px;
+    background-color: #ffcccc;
+    background: linear-gradient(0deg, rgba(244,244,244,1) 0%, rgba(255,204,204,1) 10%, rgba(255,204,204,1) 90%, rgba(244,244,244,1) 100%);
+    border-radius: 5px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.errorMessage {
+    color: #7c0303;
+    font-size: 20px;
+}
+
 .loginForm {
     display: flex;
     flex-direction: column;
-    padding-top: 70px;
-    width: 90%;
+    width: 95%;
+    align-items: center;
 }
 
 label {
     margin-top: 20px;
-    margin-left: 8px;
+    margin-left: 15px;
+    margin-right: auto;
     color: #7c0303;
     font-size: 15px;
     font-family: 'Tungsten', sans-serif;
@@ -83,15 +105,7 @@ label {
     padding-left: 10px;
     border-width: 1px;
     border-color: #C8C8C8;
-}
-
-.passwordField {
-    outline: none;
-    height: 35px;
-    border-radius: 10px;
-    padding-left: 10px;
-    border-width: 1px;
-    border-color: #C8C8C8;
+    width: 90%;
 }
 
 .submitBtn {

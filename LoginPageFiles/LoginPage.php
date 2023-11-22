@@ -21,7 +21,8 @@
                         include "loginHelper.php"; // imports helper functions
                         session_start(); // Allows session variables to be used
 
-                        if(!empty($_POST["username"]) && !empty($_POST["password"])){
+                        // Checks if there is any input
+                        if(!empty($_POST["username"]) || !empty($_POST["password"])){
                             // Sets username and password from form
                             $username = $_POST["username"];
                             $password = $_POST["password"];
@@ -44,8 +45,14 @@
                             }
 
                             else {
-                                echo "Incorrect Username or Password";
+                                echo '<div class="withError"> 
+                                        <div class="errorMessage">Incorrect Username or Password</div>
+                                    </div>';
                             }
+                        }
+
+                        else {
+                            echo '<div class="noError"></div>';
                         }
                     ?>
                     <label>Username</label>
