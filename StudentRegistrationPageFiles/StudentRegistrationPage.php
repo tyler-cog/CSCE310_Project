@@ -221,7 +221,7 @@
                     </div>
                     <div class="thirdInputBox">
                         <div class="noError"></div>
-                        <label>Expected Grauation Date</label>
+                        <label>Expected Graduation Date</label>
                         <input class="textField" type="date" name="exp_grad" value="<?php echo htmlspecialchars($exp_grad); ?>" required>
                     </div>
                     <div class="thirdInputBox">
