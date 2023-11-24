@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="LoginPage.css">
+    <link rel="stylesheet" href="LoginPage.css?v=<?php echo time(); ?>" >
 </head>
 <body>
     <div class="surface">
@@ -20,6 +20,9 @@
                         include "../connection.php"; // imports everything from connection.php
                         include "loginHelper.php"; // imports helper functions
                         session_start(); // Allows session variables to be used
+
+                        $username = "";
+                        $password = "";
 
                         // Checks if there is any input
                         if(!empty($_POST["username"]) || !empty($_POST["password"])){
@@ -56,13 +59,16 @@
                         }
                     ?>
                     <label>Username</label>
-                    <input class="inputField" type="text" name="username">
+                    <input class="inputField" type="text" name="username" value="<?php echo htmlspecialchars($username); ?>" required>
                     <label>Password</label>
-                    <input class="inputField" type="password" name="password">
+                    <input class="inputField" type="password" name="password" value="<?php echo htmlspecialchars($password); ?>" required>
                     <input class="submitBtn" type="submit" value="Sign In">
                 </form>
                 <div class="greyDivider"></div>
-                <a href="registration.php">Create account</a>
+                <div class="linksBox">
+                    <a href="../AdminRegistrationPageFiles/AdminRegistrationPage.php">Create Admin Account</a>
+                    <a href="../StudentRegistrationPageFiles/StudentRegistrationPage.php">Create Student Account</a>
+                </div>
             </div>
         </div>
     </div>
