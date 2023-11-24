@@ -45,13 +45,22 @@ img {
     min-width: 700px;
 }
 
+a {
+    color: #7c0303;
+    margin-right: auto;
+    margin-top: 5px;
+    margin-left: 10px;
+    font-size: 20px;
+    text-decoration: none;
+}
+
 .regWord {
     color: #7c0303;
     font-size: 35px;
     height: 35px;
     font-family: 'Tungsten', sans-serif;
     font-weight: 50;
-    margin-top: 20px;
+    margin-top: 0px;
     margin-bottom: 20px;
 }
 

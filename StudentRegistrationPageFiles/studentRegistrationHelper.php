@@ -1,6 +1,10 @@
 <?php
     function validUIN($uin){
         include "../connection.php";
+        if ($uin == ""){
+            return true;
+        }
+
         $uin = (int)$uin;
 
         if (($uin <= 0) || ($uin > 99999999999)){

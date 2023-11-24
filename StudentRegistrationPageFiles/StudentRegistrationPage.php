@@ -99,6 +99,7 @@
         </div>
         <div class="greyBack"> 
             <div class="regBox">
+                <a href="../LoginPageFiles/LoginPage.php">< Back</a>
                 <p class="regWord">STUDENT REGISTRATION </p>
                 <div class="maroonDivider"></div>
                 <form class="regForm" action="StudentRegistrationPage.php" method="POST">
@@ -120,11 +121,15 @@
                     <div class="thirdInputBox">
                         <?php
                             require_once "studentRegistrationHelper.php";
-
-                            if (!validUIN($_POST['uin'])){
-                                echo '<div class="withError">
-                                        <div class="errorMessage">UIN already taken or invalid</div>
-                                    </div>';
+                            if (isset($_POST['uin'])) {
+                                if (!validUIN($_POST['uin'])){
+                                    echo '<div class="withError">
+                                            <div class="errorMessage">UIN already taken or invalid</div>
+                                        </div>';
+                                }
+                                else {
+                                    echo '<div class="noError"></div>';
+                                }
                             }
 
                             else {
@@ -181,11 +186,15 @@
                     <div class="thirdInputBox">
                         <?php
                             require_once "studentRegistrationHelper.php";
-
-                            if (!validGPA($_POST['gpa'])){
-                                echo '<div class="withError">
-                                        <div class="errorMessage"> Invalid GPA</div>
-                                    </div>';
+                            if (isset($_POST['gpa'])) {
+                                if (!validGPA($_POST['gpa'])){
+                                    echo '<div class="withError">
+                                            <div class="errorMessage"> Invalid GPA</div>
+                                        </div>';
+                                }
+                                else {
+                                    echo '<div class="noError"></div>';
+                                }
                             }
 
                             else {
@@ -233,11 +242,16 @@
                     <div class="thirdInputBox">
                         <?php
                             require_once "studentRegistrationHelper.php";
+                            if (isset($_POST['phone'])) {
+                                if (!validPhoneNumber($_POST['phone'])){
+                                    echo '<div class="withError">
+                                            <div class="errorMessage">Invalid Phone Number</div>
+                                        </div>';
+                                }
 
-                            if (!validPhoneNumber($_POST['phone'])){
-                                echo '<div class="withError">
-                                        <div class="errorMessage">Invalid Phone Number</div>
-                                    </div>';
+                                else {
+                                    echo '<div class="noError"></div>';
+                                }
                             }
 
                             else {
@@ -254,11 +268,15 @@
                     <div class="halfInputBox">
                         <?php
                             require_once "studentRegistrationHelper.php";
-
-                            if (!validUsername($_POST['username'])){
-                                echo '<div class="withError">
-                                        <div class="errorMessage">Username already taken</div>
-                                    </div>';
+                            if (isset($_POST['username'])) {
+                                if (!validUsername($_POST['username'])){
+                                    echo '<div class="withError">
+                                            <div class="errorMessage">Username already taken</div>
+                                        </div>';
+                                }
+                                else {
+                                    echo '<div class="noError"></div>';
+                                }
                             }
 
                             else {
