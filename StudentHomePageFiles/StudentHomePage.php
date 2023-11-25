@@ -1,10 +1,7 @@
 <?php
-    session_start(); // Allows session variables to be used
+    session_start();
     $username = $_SESSION['username'];
-    echo $username . " Student Homepage";
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,9 +9,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="StudentHomePage..css?v=<?php echo time(); ?>" >
 </head>
 <body>
-
+   <div class="surface">
+        <div class="maroonBar">
+            <a href="../LoginPageFiles/LoginPage.php">↩</a>
+            <a href="">⚙️</a>
+        </div>
+   </div>
 </body>
 </html>

@@ -1,7 +1,6 @@
 <?php
     session_start();
     $username = $_SESSION['username'];
-    echo $username . " Admin Homepage";
 ?>
 
 <!DOCTYPE html>
@@ -10,9 +9,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="AdminHomePage..css?v=<?php echo time(); ?>" >
 </head>
 <body>
-   <div> Admin Homepage </div>
+   <div class="surface">
+        <div class="maroonBar">
+            <a href="../LoginPageFiles/LoginPage.php">↩</a>
+            <a href="">⚙️</a>
+        </div>
+   </div>
 </body>
 </html>
