@@ -14,8 +14,8 @@
 <body>
    <div class="surface">
         <div class="maroonBar">
-            <a href="../LoginPageFiles/LoginPage.php">↩</a>
-            <a href="">⚙️</a>
+            <a href="../LoginPageFiles/LoginPage.php" title="Logout">↩</a>
+            <a href="" title="Settings">⚙️</a>
         </div>
    </div>
 </body>
