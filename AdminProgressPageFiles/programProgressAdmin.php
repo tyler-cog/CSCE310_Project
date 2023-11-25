@@ -52,6 +52,33 @@
             <?php
                 adminCourseEnrollment($_SESSION["UIN"]);
             ?>
+
+            <br>
+
+            <form class="CourseEnrollmentInsert" action="programProgressAdmin.php" method="POST">
+                    
+                
+                <label>UIN:</label>
+                <input type="text" id="UINInsert" name="UINInsert">
+                    
+                <label>Class ID:</label>
+                <input type="text" id="Class_IDInsert" name="Class_IDInsert">
+                
+                <label>Status:</label>
+                <input type="text" id="StatusInsert" name="StatusInsert">
+
+                <label>Semester:</label>
+                <input type="text" id="SemesterInsert" name="SemesterInsert">
+
+                <label>Year:</label>
+                <input type="text" id="YearInsert" name="YearInsert">
+
+                <input type='hidden' name='InsertCourseEnrollment' value='insertCourseEnrollment'>
+                
+                
+                <input type="submit" value="Submit">
+            </form>
+
         </div>
     </div>
 

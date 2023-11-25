@@ -90,11 +90,37 @@
     }
 
 
+
+    function insertCourseEnrollment(){
+        include "../connection.php";
+
+        $UIN = $_POST['UINInsert'];
+        $Class_ID = $_POST['Class_IDInsert'];
+        $Status = $_POST['StatusInsert'];
+        $Semester = $_POST['SemesterInsert'];
+        $Year = $_POST['YearInsert'];
+        
+        $sql_query = "INSERT INTO `class_enrollment` (UIN, Class_ID, Status, Semester, Year) VALUES ($UIN, $Class_ID, '$Status', '$Semester', '$Year')";
+        $result = $db_conn->query($sql_query);
+    }
+
+    /*
+        ISSUE IS THAT NEED TO DO IT LIKE THE UPDATE AND DELETE
+
+        GETTING CALLED EVERYTIME THE PAGE LOADS (Table and INSERT)
+    
+    
+    */
+
+
     if(array_key_exists('DeleteCourseEnrollment',$_POST)){
         deleteCourseEnrollment($_POST['CE_Num']);
     }
     else if(array_key_exists('UpdateCourseEnrollment', $_POST)){
         updateCourseEnrollment();
+    }
+    else if(array_key_exists('InsertCourseEnrollment', $_POST)){
+        insertCourseEnrollment();
     }
 
 ?>
