@@ -1,3 +1,8 @@
+<?php
+    include "../connection.php";
+    include "programProgressAdminHelper.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,19 +22,20 @@
         <div class="studentSelection">
         <form class="studentSelectionForm" action="programProgressAdmin.php" method="POST">
                 <?php
-                    include "../connection.php";
-                    include "programProgressAdminHelper.php";
 
                     session_start();
 
                     if(!empty($_POST["UIN"])){
 
                         $UIN = $_POST["UIN"];
-
-                        if (isValidUIN($UIN)){
-
-                            //FILL OTHER TABLES
+                        if (!(isValidUIN($UIN))){
+                            echo '<h3>**INVALID UIN PLEASE ENTER NEW UIN**<h3>';
                         }
+                        else{
+                            $_SESSION['UIN'] = $UIN;
+                        }
+
+                        
                     }
                 ?>
                 <label>UIN:</label>
@@ -42,7 +48,11 @@
 
     <div class="section">
         <h2>COURSE ENROLLMENT</h2>
-        <p>Content for section 2 goes here.</p>
+        <div class="studentSelection">
+            <?php
+                adminCourseEnrollment($_SESSION["UIN"]);
+            ?>
+        </div>
     </div>
 
     <div class="section">
