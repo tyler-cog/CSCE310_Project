@@ -16,6 +16,13 @@ body {
     border: 1px solid #500000;
 }
 
+.maroonBar {
+    background-color: #500000;
+    display: flex;
+    min-height: 50px;
+    align-items: center;
+}
+
 h1 {
     text-align: center;
     font-family: 'Tungsten', sans-serif;

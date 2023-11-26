@@ -4,6 +4,12 @@ html, body {
     height: 100%;
 }  
 
+.surface {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
 .maroonBar {
     background-color: #500000;
     display: flex;
@@ -12,10 +18,10 @@ html, body {
 }
 
 a {
+    color: #C8C8C8;
     font-size: 20px;
     text-decoration: none;
     margin-left: 10px;
-    margin-top: 10px;
 }
 
 .greyBack {
@@ -53,4 +59,18 @@ a {
     height: 2px;
     background-color: #7c0303;
     width: 95%;
+}
+
+.greyDivider {
+    height: 1px;
+    background-color: grey;
+    width: 95%;
+}
+
+.regForm {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 95%;
+    flex-wrap: wrap;
 }

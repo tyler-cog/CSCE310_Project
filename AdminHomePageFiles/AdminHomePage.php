@@ -17,6 +17,9 @@
             <a href="../LoginPageFiles/LoginPage.php" title="Logout">↩</a>
             <a href="" title="Settings">⚙️</a>
         </div>
+
+        <a href="../AdminProgressPageFiles/programProgressAdmin.php">Program Progress Tracking</a>
+        <a href="../AdminProgramManagementPageFiles/AdminProgramManagement.php">Program Information Management</a>
    </div>
 </body>
 </html>

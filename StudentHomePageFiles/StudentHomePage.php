@@ -12,11 +12,18 @@
     <link rel="stylesheet" href="StudentHomePage.css?v=<?php echo time(); ?>" >
 </head>
 <body>
-   <div class="surface">
-        <div class="maroonBar">
-            <a href="../LoginPageFiles/LoginPage.php" title="Logout">↩</a>
-            <a href="" title="Settings">⚙️</a>
+    <div class="maroonBar">
+        <a href="../LoginPageFiles/LoginPage.php" title="Logout" color=#C8C8C8>↩</a>
+        <a href="" title="Settings" color=color: #C8C8C8>⚙️</a>
+    </div>
+
+   <div class="greyBack"> 
+        <div class="regBox">
+            <p class="regWord">STUDENT HOME</p>
+            <div class="maroonDivider"></div>
+
+            <a href="../StudentApplicationPageFiles/StudentApplicationPage.php" color=black>Application Management</a>
         </div>
-   </div>
+    </div>
 </body>
 </html>

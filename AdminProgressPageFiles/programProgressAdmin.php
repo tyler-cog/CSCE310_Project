@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="programProgress.css">
 </head>
 <body>
+    <a href="../AdminHomePageFiles/AdminHomePage.php" title="Back">←</a>
 
     <div class="title">
         <h1>ADMIN PROGRAM PROGRESS TRACKING<h1>
