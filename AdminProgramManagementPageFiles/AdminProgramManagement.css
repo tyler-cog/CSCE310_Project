@@ -23,3 +23,40 @@ a {
     text-decoration: none;
     margin-left: 10px;
 }
+
+.greyBack {
+    background-color: #C8C8C8;
+    height: 100%;
+    min-height: 400px;
+    display: flex;
+    justify-content: center;
+}
+
+.regBox {
+    margin-top: 20px;
+    background-color: #f4f4f4;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 85%;
+    min-height: 300px;
+    width: 80%;
+    min-width: 700px;
+}
+
+.regWord {
+    color: #7c0303;
+    font-size: 35px;
+    height: 35px;
+    font-family: 'Tungsten', sans-serif;
+    font-weight: 50;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.maroonDivider {
+    height: 2px;
+    background-color: #7c0303;
+    width: 95%;
+}

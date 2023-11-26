@@ -14,5 +14,13 @@
     <div class="maroonBar">
         <a href="../AdminHomePageFiles/AdminHomePage.php" title="Back">←</a>
     </div>
+
+   <div class="greyBack"> 
+            <div class="regBox">
+                <p class="regWord">PROGRAM MANAGEMENT</p>
+                <div class="maroonDivider"></div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

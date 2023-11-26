@@ -12,14 +12,19 @@
     <link rel="stylesheet" href="AdminHomePage.css?v=<?php echo time(); ?>" >
 </head>
 <body>
-   <div class="surface">
-        <div class="maroonBar">
-            <a href="../LoginPageFiles/LoginPage.php" title="Logout">↩</a>
-            <a href="" title="Settings">⚙️</a>
-        </div>
+    <div class="maroonBar">
+        <a href="../LoginPageFiles/LoginPage.php" title="Logout" color=#C8C8C8>↩</a>
+        <a href="" title="Settings" color=#C8C8C8>⚙️</a>
+    </div>
 
-        <a href="../AdminProgressPageFiles/programProgressAdmin.php">Program Progress Tracking</a>
-        <a href="../AdminProgramManagementPageFiles/AdminProgramManagement.php">Program Information Management</a>
-   </div>
+   <div class="greyBack"> 
+        <div class="regBox">
+            <p class="regWord">ADMIN HOME</p>
+            <div class="maroonDivider"></div>
+
+            <a href="../AdminProgressPageFiles/programProgressAdmin.php" color=black>Program Progress Tracking</a>
+            <a href="../AdminProgramManagementPageFiles/AdminProgramManagement.php" color=black>Program Information Management</a>
+        </div>
+    </div>
 </body>
 </html>
