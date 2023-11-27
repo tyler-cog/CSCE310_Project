@@ -24,6 +24,7 @@
 
             <a href="../AdminProgressPageFiles/programProgressAdmin.php" color=black>Program Progress Tracking</a>
             <a href="../AdminProgramManagementPageFiles/AdminProgramManagement.php" color=black>Program Information Management</a>
+            <a href="../AdminEventPageFiles/AdminEventPage.php" color=black>Event Management</a>
         </div>
     </div>
 </body>
