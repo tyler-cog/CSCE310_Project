@@ -23,6 +23,7 @@
             <div class="maroonDivider"></div>
 
             <a href="../StudentApplicationPageFiles/StudentApplicationPage.php" color=black>Application Management</a>
+            <a href="../StudentDocPageFiles/StudentDocPage.php" color=black>Document Management</a>
         </div>
     </div>
 </body>
