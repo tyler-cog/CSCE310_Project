@@ -43,7 +43,7 @@
 
         foreach ($data as $row) {
             echo "<tr>";
-            echo "<form action='programProgressAdmin.php' method='post'>";
+            echo "<form action='ProgramProgress.php' method='post'>";
             echo "<td>" . $row["CE_Num"] . "</td>";
             echo "<td>" . $row["UIN"] . "</td>";
             echo "<td><input type='text' name='Class_IDInput' value='" . $row["Class_ID"] . "'></td>";
@@ -55,7 +55,7 @@
             echo "<td><input type='hidden' name='UpdateCourseEnrollment' value='updateCourseEnrollment'>";
             echo "<input type='submit' value='Update'></td>";
             echo "</form>";
-            echo "<form action='programProgressAdmin.php' method='post'>";
+            echo "<form action='ProgramProgress.php' method='post'>";
             echo "<td><input type='hidden' name='CE_Num' value='" . $row["CE_Num"] . "'>";
             echo "<td><input type='hidden' name='DeleteCourseEnrollment' value='deleteCourseEnrollment'>";
             echo "<input type='submit' value='Delete'></td>";

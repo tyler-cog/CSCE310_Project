@@ -1,6 +1,6 @@
 <?php
     include "../connection.php";
-    include "programProgressAdminHelper.php";
+    include "ProgramProgressHelper.php";
 ?>
 
 <!DOCTYPE html>
@@ -8,11 +8,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ProgramProgressAdmin</title>
-    <link rel="stylesheet" href="programProgress.css">
+    <title>ProgramProgress</title>
+    <link rel="stylesheet" href="../Style/ProgramProgress.css">
 </head>
 <body>
-    <a href="../AdminHomePageFiles/AdminHomePage.php" title="Back">←</a>
+    <a href="../Admin/AdminHome.php" title="Back">←</a>
 
     <div class="title">
         <h1>ADMIN PROGRAM PROGRESS TRACKING<h1>
@@ -21,7 +21,7 @@
     <div class="section">
         <h2>STUDENT SELECTION</h2>
         <div class="studentSelection">
-        <form class="studentSelectionForm" action="programProgressAdmin.php" method="POST">
+        <form class="studentSelectionForm" action="ProgramProgress.php" method="POST">
                 <?php
 
                     session_start();
@@ -56,7 +56,7 @@
 
             <br>
 
-            <form class="CourseEnrollmentInsert" action="programProgressAdmin.php" method="POST">
+            <form class="CourseEnrollmentInsert" action="ProgramProgress.php" method="POST">
                     
                 
                 <label>UIN:</label>

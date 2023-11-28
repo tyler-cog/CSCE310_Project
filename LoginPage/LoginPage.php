@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="LoginPage.css?v=<?php echo time(); ?>" >
+    <link rel="stylesheet" href="../Style/LoginPage.css?v=<?php echo time(); ?>" >
 </head>
 <body>
     <div class="surface">
@@ -36,13 +36,13 @@
                                 // checks if student or admin
                                 if (userType($username) == "Student"){
                                     $_SESSION['username'] = $username; // Saves to session variable
-                                    header("Location: ../StudentHomePageFiles/StudentHomePage.php");
+                                    header("Location: ../Student/StudentHome.php");
                                     exit();
                                 }
 
                                 else if (userType($username) == "Admin"){
                                     $_SESSION['username'] = $username; // Saves to session variable
-                                    header("Location: ../AdminHomePageFiles/AdminHomePage.php");
+                                    header("Location: ../Admin/AdminHome.php");
                                     exit();
                                 }
                             }
@@ -66,8 +66,8 @@
                 </form>
                 <div class="greyDivider"></div>
                 <div class="linksBox">
-                    <a href="../AdminRegistrationPageFiles/AdminRegistrationPage.php">Create Admin Account</a>
-                    <a href="../StudentRegistrationPageFiles/StudentRegistrationPage.php">Create Student Account</a>
+                    <a href="../Admin/Registration.php">Create Admin Account</a>
+                    <a href="../Student/Registration.php">Create Student Account</a>
                 </div>
             </div>
         </div>

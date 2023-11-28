@@ -1,5 +1,5 @@
 <?php
-    require_once "studentRegistrationHelper.php";
+    require_once "RegistrationHelper.php";
 
     $first_name = "";
     $m_initial = "";
@@ -76,7 +76,7 @@
             $dob, $gpa, $major, $minor1, $minor2, $exp_grad, 
             $school, $curr_class, $student_type, $phone);
 
-            header("Location: ../LoginPageFiles/LoginPage.php");
+            header("Location: ../LoginPage/LoginPage.php");
             exit();
             
         }
@@ -90,7 +90,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="StudentRegistrationPage.css?v=<?php echo time(); ?>" >
+    <link rel="stylesheet" href="../Style/Registration.css?v=<?php echo time(); ?>" >
 </head>
 <body>
     <div class="surface">
@@ -99,10 +99,10 @@
         </div>
         <div class="greyBack"> 
             <div class="regBox">
-                <a href="../LoginPageFiles/LoginPage.php">< Back</a>
+                <a href="../LoginPage/LoginPage.php">< Back</a>
                 <p class="regWord">STUDENT REGISTRATION </p>
                 <div class="maroonDivider"></div>
-                <form class="regForm" action="StudentRegistrationPage.php" method="POST">
+                <form class="regForm" action="Registration.php" method="POST">
                     <div class="thirdInputBox">
                         <div class="noError"></div>
                         <label>First Name</label>
@@ -120,7 +120,7 @@
                     </div>
                     <div class="thirdInputBox">
                         <?php
-                            require_once "studentRegistrationHelper.php";
+                            require_once "RegistrationHelper.php";
                             if (isset($_POST['uin'])) {
                                 if (!validUIN($_POST['uin'])){
                                     echo '<div class="withError">
@@ -185,7 +185,7 @@
 
                     <div class="thirdInputBox">
                         <?php
-                            require_once "studentRegistrationHelper.php";
+                            require_once "RegistrationHelper.php";
                             if (isset($_POST['gpa'])) {
                                 if (!validGPA($_POST['gpa'])){
                                     echo '<div class="withError">
@@ -241,7 +241,7 @@
                     </div>
                     <div class="thirdInputBox">
                         <?php
-                            require_once "studentRegistrationHelper.php";
+                            require_once "RegistrationHelper.php";
                             if (isset($_POST['phone'])) {
                                 if (!validPhoneNumber($_POST['phone'])){
                                     echo '<div class="withError">
@@ -267,7 +267,7 @@
 
                     <div class="halfInputBox">
                         <?php
-                            require_once "studentRegistrationHelper.php";
+                            require_once "RegistrationHelper.php";
                             if (isset($_POST['username'])) {
                                 if (!validUsername($_POST['username'])){
                                     echo '<div class="withError">

@@ -9,11 +9,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="StudentHomePage.css?v=<?php echo time(); ?>" >
+    <link rel="stylesheet" href="../Style/Home.css?v=<?php echo time(); ?>" >
 </head>
 <body>
     <div class="maroonBar">
-        <a href="../LoginPageFiles/LoginPage.php" title="Logout" color=#C8C8C8>↩</a>
+        <a href="../LoginPage/LoginPage.php" title="Logout" color=#C8C8C8>↩</a>
         <a href="" title="Settings" color=#C8C8C8>⚙️</a>
     </div>
 
@@ -22,8 +22,8 @@
             <p class="regWord">STUDENT HOME</p>
             <div class="maroonDivider"></div>
 
-            <a href="../StudentApplicationPageFiles/StudentApplicationPage.php" color=black>Application Management</a>
-            <a href="../StudentDocPageFiles/StudentDocPage.php" color=black>Document Management</a>
+            <a href="../Student/ApplicationManagement.php" color=black>Application Management</a>
+            <a href="../Student/DocManagement.php" color=black>Document Management</a>
         </div>
     </div>
 </body>

@@ -1,4 +1,4 @@
 <?php
-    header("Location: LoginPageFiles/LoginPage.php");
+    header("Location: LoginPage/LoginPage.php");
     exit();
 ?>
