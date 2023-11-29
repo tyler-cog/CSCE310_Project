@@ -127,7 +127,7 @@
                     <label>Year:</label>
                     <input type="text" id="Cert_YearInsert" name="Cert_YearInsert">
 
-                    <input type='hidden' name='InsertCertification' value='InsertCertification'>
+                    <input type='hidden' name='InsertCertification' value='insertCertification'>
 
                     <input type="submit" value="Submit">
 
@@ -139,7 +139,35 @@
 
     <div class="section">
         <h2>INTERNSHIPS</h2>
-        <p>Content for section 4 goes here.</p>
+        <!-- This calls the adminInternships function from the helper php file -->
+        <?php
+            adminInternships($_SESSION["UIN"]);
+        ?>
+        <br>
+
+        <!-- Insert form for adding certifications that queries the database on sumbit -->
+        <form class="Certification" action="ProgramProgress.php" method="POST">
+            <label>UIN:</label>
+            <input type="text" id="Intern_UINInsert" name="Intern_UINInsert">
+            
+            <label>Intern ID:</label>
+            <input type="text" id="Intern_InternIDInsert" name="Intern_InternIDInsert">
+            
+            <label>Status:</label>
+            <input type="text" id="Intern_StatusInsert" name="Intern_StatusInsert">
+
+            <label>Year:</label>
+            <input type="text" id="Intern_YearInsert" name="Intern_YearInsert">
+
+            <input type='hidden' name='InsertIntern' value='insertIntern'>
+
+            <input type="submit" value="Submit">
+
+
+        </form>
+
+
+
     </div>
 
     <div class="section">

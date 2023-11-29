@@ -222,6 +222,95 @@
     }
 
 
+     //Function called to display table of all internships that the 'UIN' passed has applied for, been rejected from, or has accepted
+    function adminInternships($UIN){
+        include "../connection.php";
+        $sql_query = "SELECT * FROM `intern_app` WHERE `UIN` = '$UIN'";
+        $result = $db_conn->query($sql_query);
+
+        $data = array();
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $data[] = $row;
+            }
+        }
+
+        echo "<table border='1'>
+        <tr>
+            <th>IA_Num</th>
+            <th>UIN</th>
+            <th>Intern_ID</th>
+            <th>Status</th>
+            <th>Year</th>
+        </tr>";
+
+        //For each loop that creates a table that not only displays the table but allows users to update and delete rows as needed
+        foreach ($data as $row) {
+            
+            echo "<tr>";
+            echo "<form action='ProgramProgress.php' method='post'>";
+            echo "<td>" . $row["IA_Num"] . "</td>";
+            echo "<td>" . $row["UIN"] . "</td>";
+
+            echo "<td><input type='text' name='Intern_Intern_IDInput' value='" . $row["Intern_ID"] . "'></td>";
+            echo "<td><input type='text' name='Intern_StatusInput' value='" . $row["Status"] . "'></td>";
+            echo "<td><input type='text' name='Intern_YearInput' value='" . $row["Year"] . "'></td>";
+            echo "<td><input type='hidden' name='Intern_IA_NumInput' value='" . $row["IA_Num"] . "'>";
+            echo "<td><input type='hidden' name='Intern_UINInput' value='" . $row["UIN"] . "'>";
+            echo "<td><input type='hidden' name='UpdateIntern' value='updateIntern'>"; //the updateCourseEnrollment value triggerrs the if statment in the main part of this php file and puts all the values in the post array to be accesssed later
+            echo "<input type='submit' value='Update'></td>";
+            echo "</form>";
+            echo "<form action='ProgramProgress.php' method='post'>";
+            echo "<td><input type='hidden' name='IA_Num' value='" . $row["IA_Num"] . "'>";
+            echo "<td><input type='hidden' name='DeleteIntern' value='deleteIntern'>"; //the deleteCourseEnrollment value triggerrs the if statment in the main part of this php file and puts all the values in the post array to be accesssed later
+            echo "<input type='submit' value='Delete'></td>";
+            echo "</form>";
+            echo "</tr>";
+        }
+
+
+        echo "</table>";
+    }
+
+    //Function that queries the database and deletes the specifc internship a UIN has given the IA_Num
+    function deleteIntern($IA_Num){
+        include "../connection.php";
+        $sql_query = "DELETE FROM `intern_app` WHERE `IA_Num` = '$IA_Num'";
+        $result = $db_conn->query($sql_query); 
+    }
+
+    //Function that queries the database and updates a particular row of the internship table for the a particular UIN
+    function updateIntern(){
+        include "../connection.php";
+        $IA_Num = $_POST['Intern_IA_NumInput'];
+        $UIN = $_POST['Intern_UINInput'];
+        $Intern_ID = $_POST['Intern_Intern_IDInput'];
+        $Status = $_POST['Intern_StatusInput'];
+        $Year = $_POST['Intern_YearInput'];
+
+        $sql_query = "UPDATE `intern_app` SET Intern_ID='$Intern_ID', Status='$Status', Year='$Year' WHERE IA_Num='$IA_Num' AND UIN='$UIN'";
+        $result = $db_conn->query($sql_query);
+
+    }
+
+    //Function that queries the database and inserts a new record into the intern_app table based on the values passed in by the admin
+    function insertIntern(){
+        include "../connection.php";
+
+        $UIN = $_POST['Intern_UINInsert'];
+        $Intern_ID = $_POST['Intern_InternIDInsert'];
+        $Status = $_POST['Intern_StatusInsert'];
+        $Year = $_POST['Intern_YearInsert'];
+
+        $sql_query = "INSERT INTO `intern_app` (UIN, Intern_ID, Status, Year) VALUES ($UIN, 5, '$Status', '$Year')";
+        $result = $db_conn->query($sql_query);
+    
+
+    }
+
+
+
     //Main part of the php file, when a submit button is pressed the values contained within the input determine which function should be called
     if(array_key_exists('DeleteCourseEnrollment',$_POST)){
         deleteCourseEnrollment($_POST['CE_Num']);
@@ -241,7 +330,15 @@
     else if(array_key_exists('InsertCertification', $_POST)){
         insertCertification();
     }
-    
+    else if(array_key_exists('DeleteIntern',$_POST)){
+        deleteIntern($_POST['IA_Num']);
+    }
+    else if(array_key_exists('UpdateIntern',$_POST)){
+        updateIntern();
+    }
+    else if(array_key_exists('InsertIntern',$_POST)){
+        insertIntern();
+    }
 
 
 ?>
