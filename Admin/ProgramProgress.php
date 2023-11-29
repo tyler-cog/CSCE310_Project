@@ -10,7 +10,7 @@
 <?php
     include "../connection.php";
     include "ProgramProgressHelper.php";
-    $_POST = array();
+    //$_POST = array();
 ?>
 
 <!DOCTYPE html>
