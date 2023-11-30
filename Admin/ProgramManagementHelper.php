@@ -1,10 +1,10 @@
 <!-- Code written by Sydney Beeler -->
 
 <?php
-    function selectActivePrograms(){
+    function selectActivePrograms() {
         include "../connection.php";
         
-        $sql_query = "SELECT Name, Description, Status FROM programs WHERE Status='Active'"; 
+        $sql_query = "SELECT * FROM programs WHERE Status='Active'"; 
     
         $result = $db_conn->query($sql_query);
     
@@ -15,10 +15,11 @@
         }
     }
 
-    function selectAllPrograms(){
+
+    function selectAllPrograms() {
         include "../connection.php";
 
-        $sql_query = "SELECT Name, Description, Status FROM programs"; 
+        $sql_query = "SELECT * FROM programs"; 
     
         $result = $db_conn->query($sql_query);
     
@@ -28,6 +29,25 @@
             die("Error fetching programs: " . $db_conn->error);
         }
     }
+
+
+    function updateProgram() {
+        include "../connection.php";
+        
+        $ID = $_REQUEST['ID'];
+        $Name = $_REQUEST['Name'];
+        $Description = $_REQUEST['Description'];
+        $Status = $_REQUEST['Status'];
+        
+        $sql_query = "UPDATE programs SET Name='$Name', Description='$Description', Status='$Status' WHERE Program_Num='$ID'";
+        $result = $db_conn->query($sql_query);
+    }
+
+
+    function deleteProgram() {
+
+    }
+
 
     function displayProgramsTable($active) {
         if ($active) {
@@ -37,12 +57,11 @@
             $programs = selectAllPrograms();
         }
         
-        $html = '<div>
-                    <table border="1">';
-    
-        $html .= '<thead>
+        $html = '<div><table border="1">
+                    <thead>
                     <tr>
-                        <th>Program Name</th>
+                        <th>ID</th>
+                        <th>Name</th>
                         <th>Description</th>
                         <th>Status</th>
                     </tr>
@@ -52,9 +71,16 @@
         if ($programs && $programs->num_rows > 0) {
             while ($row = $programs->fetch_assoc()) {
                 $html .= "<tr>
-                            <td>" . $row['Name'] . "</td>
-                            <td>" . $row['Description'] . "</td>
-                            <td>" . $row['Status'] . "</td>
+                            <td>" . $row['Program_Num'] . "</td>
+                            <form method='POST'>
+                                <td><input type='text' style='width:120px' name='Name' value='" . $row['Name'] . "'</td>
+                                <td><input type='text' style='width:600px' name='Description' value='" . $row['Description'] . "'</td>
+                                <td><input type='text' style='width:60px' name='Status' value='" . $row['Status'] . "'</td>
+                                <td><input type='hidden' name='ID' value='" . $row['Program_Num'] . "'</td>
+
+                                <td><input type='submit' name='updateProgram' value='Update'></td>
+                                <td><input type='submit' name='deleteProgram' value='Delete'></td>
+                            </form>
                           </tr>";
             }
         } else {
@@ -85,6 +111,14 @@
         } else {
             echo "Error adding program: " . $db_conn->error;
         }
+    }
+
+    
+    if(array_key_exists('updateProgram', $_POST)) {
+        updateProgram();
+    }
+    else if(array_key_exists('deleteProgram', $_POST)) {
+        deleteProgram();
     }
 
 ?>
