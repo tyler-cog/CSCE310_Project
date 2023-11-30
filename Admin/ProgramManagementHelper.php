@@ -1,8 +1,6 @@
 <!-- Code written by Sydney Beeler -->
 
 <?php
-    include "../connection.php";
-
     function selectActivePrograms(){
         include "../connection.php";
         
@@ -48,8 +46,8 @@
                         <th>Description</th>
                         <th>Status</th>
                     </tr>
-                </thead>
-                <tbody>';
+                    </thead>
+                    <tbody>';
     
         if ($programs && $programs->num_rows > 0) {
             while ($row = $programs->fetch_assoc()) {
@@ -63,7 +61,30 @@
             $html .= "<tr><td colspan='8'>No active programs found.</td></tr>";
         }
 
-        return $html;
+        echo $html;
+        echo "</table>";
+    }
+
+    //////////////////////////////////////////////////////////////////////////////
+    function insertProgram() {
+        include "../connection.php";
+
+        $Name = $_REQUEST['Name'];
+        $Description = $_REQUEST['Description'];
+        $Status = $_REQUEST['Status'];
+
+        if ($Status == "active"){
+            $Status = "Active";
+        }
+        
+        $sql_query = "INSERT INTO programs (Name, Description, Status) VALUES ('$Name', '$Description', '$Status')";
+        $result = $db_conn->query($sql_query);
+
+        if ($result) {
+            echo "New program added successfully.";
+        } else {
+            echo "Error adding program: " . $db_conn->error;
+        }
     }
 
 ?>

@@ -23,28 +23,58 @@
                 <p class="regWord">PROGRAM MANAGEMENT</p>
                 <div class="maroonDivider"></div>
 
-                <div class="section">
+                <!-- View either all or active programs -->
+                <div class="programTables">
                     <h2>View, Update, and Delete Programs</h2>
-                    <div class="programSelection">
-                        <?php
-                            if(array_key_exists('selectActivePrograms', $_POST)) {
-                                echo displayProgramsTable($active=TRUE);
-                            }
-                            else if(array_key_exists('selectAllPrograms', $_POST)) {
-                                echo displayProgramsTable($active=FALSE);
-                            }
-                        ?>
+                    <br>
+                    <!-- Buttons to view active or all programs -->
+                    <form method="POST"> 
+                        <input type="submit" name="selectActivePrograms" class="button" value="View Active Programs" /> 
+                        <input type="submit" name="selectAllPrograms" class="button" value="View All Programs" /> 
+                    </form> 
 
-                        <br>
+                    <?php
+                        if(array_key_exists('selectActivePrograms', $_POST)) {
+                            displayProgramsTable($active=TRUE);
+                        }
+                        else if(array_key_exists('selectAllPrograms', $_POST)) {
+                            displayProgramsTable($active=FALSE);
+                        }
+                    ?>
+                </div>
+                
+                <br> 
 
-                        <!-- Buttons to view active or all programs -->
-                        <form method="post"> 
-                            <input type="submit" name="selectActivePrograms" class="button" value="View Active Programs" /> 
-                            <input type="submit" name="selectAllPrograms" class="button" value="View All Programs" /> 
-                        </form> 
+                <!-- Insert new program -->
+                <div class="insertProgram">
+                    <h2>Add New Program</h2>
+                    <br>
+                    <form method="POST">
+                        <label for="Name">Name:</label>
+                        <input type="text" name="Name" id="Name">
                         
+                        <label for="Description">Description:</label>
+                        <input type="text" name="Description" id="Description">
 
-                    </div>
+                        <label for="Status">Status:</label>
+                        <input type="text" name="Status" id="Status">
+
+                        <input type="submit" name="insertProgram" value="Insert">
+                    </form>
+                    <br>
+                    <?php
+                        if(array_key_exists('insertProgram', $_POST)) {
+                            insertProgram();
+                        }
+                    ?>
+                </div>
+
+                <br>
+                
+                <!-- Generate report for a specified program --> 
+                <div class="section">
+                    <h2>Generate Report</h2>
+                    <br>
                 </div>
             </div>
     </div>
