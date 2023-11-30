@@ -45,7 +45,12 @@
 
 
     function deleteProgram() {
-
+        include "../connection.php";
+        
+        $ID = $_REQUEST['ID'];
+        
+        $sql_query = "DELETE FROM programs WHERE Program_Num='$ID'";
+        $result = $db_conn->query($sql_query);
     }
 
 
@@ -91,6 +96,7 @@
         echo "</table>";
     }
 
+
     //////////////////////////////////////////////////////////////////////////////
     function insertProgram() {
         include "../connection.php";
@@ -113,12 +119,12 @@
         }
     }
 
-    
+
+    //////////////////////////////////////////////////////////////////////////////
     if(array_key_exists('updateProgram', $_POST)) {
         updateProgram();
     }
     else if(array_key_exists('deleteProgram', $_POST)) {
         deleteProgram();
     }
-
 ?>

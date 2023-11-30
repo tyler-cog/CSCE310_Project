@@ -25,7 +25,7 @@
 
             <!-- View either all or active programs -->
             <div class="programTables">
-                <h2>View, Update, and Delete Programs</h2>
+                <h2>View, Edit, and Delete Programs</h2>
                 <br>
                 <!-- Buttons to view active or all programs -->
                 <form method="POST"> 
@@ -76,6 +76,12 @@
             <div class="section">
                 <h2>Generate Report</h2>
                 <br>
+                <form method="POST">
+                    <label>Program ID:</label>
+                    <input type="int" name="ID" id="ID">
+                    
+                    <input type="submit" name="generateReport" value="Generate Report">
+                </form>
             </div>
         </div>
     </div>
