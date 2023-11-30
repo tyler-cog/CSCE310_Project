@@ -6,7 +6,7 @@
 
 
 
-<!-- Includes the php files needed so that the dont need to be included in the future -->
+<!-- Includes the php files needed so that they don't need to be included in the future -->
 <?php
     include "../connection.php";
     include "ProgramProgressHelper.php";
