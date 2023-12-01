@@ -23,8 +23,9 @@
             <p class="regWord">PROGRAM MANAGEMENT</p>
             <div class="maroonDivider"></div>
 
-            <!-- View either all or active programs -->
-            <div class="programTables">
+            <!-- View, edit, and delete programs -->
+            <!-- TODO: update delete query if needed --> 
+            <div class="programTable">
                 <h2>View, Edit, and Delete Programs</h2>
                 <br>
                 <!-- Buttons to view active or all programs -->
@@ -73,7 +74,8 @@
             <br>
             
             <!-- Generate report for a specified program --> 
-            <div class="section">
+            <!-- TODO --> 
+            <div class="programReport">
                 <h2>Generate Report</h2>
                 <br>
                 <form method="POST">

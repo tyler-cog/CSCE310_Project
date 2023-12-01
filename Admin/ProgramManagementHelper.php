@@ -49,8 +49,9 @@
         
         $ID = $_REQUEST['ID'];
         
-        $sql_query = "DELETE FROM programs WHERE Program_Num='$ID'";
-        $result = $db_conn->query($sql_query);
+        $delete = $db_conn->query("DELETE FROM programs WHERE Program_Num='$ID'");
+
+        // TODO update usage in application, track, event, cert_enrollment
     }
 
 
