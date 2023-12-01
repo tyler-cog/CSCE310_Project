@@ -14,7 +14,6 @@
 <body>
     <div class="maroonBar">
         <a href="../LoginPage/LoginPage.php" title="Logout" color=#C8C8C8>↩</a>
-        <a href="" title="Settings" color=#C8C8C8>⚙️</a>
     </div>
 
    <div class="greyBack"> 
