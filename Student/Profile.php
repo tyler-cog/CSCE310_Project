@@ -99,7 +99,7 @@
 </head>
 <body>
 <div class="surface">
-        <div class="maroonBar"></div>
+        <div class="skinnyMaroonBar"></div>
         <div class="greyBack"> 
             <div class="regBox">
                 <a href="StudentHome.php">< Back</a>
