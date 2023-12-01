@@ -11,6 +11,14 @@ html, body {
     align-items: center;
 }
 
+.logout {
+    font-size: 20px;
+    text-decoration: none;
+    margin-left: 10px;
+    margin-top: 10px;
+    color: #C8C8C8;
+}
+
 a {
     font-size: 20px;
     text-decoration: none;

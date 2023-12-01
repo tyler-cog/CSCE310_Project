@@ -226,7 +226,44 @@
 
     }
 
+    function getProgramName($Program_Num){
+        include "../connection.php";
+        $sql_query = "SELECT Name FROM `programs` WHERE Program_Num ='$Program_Num'";
 
+        $result = $db_conn->query($sql_query);
+
+        if ($result) {
+            // Loop through the results
+            while ($row = $result->fetch_assoc()) {
+                // Access individual columns in the current row
+                $Program_Name = $row["Name"];
+                return $Program_Name;
+
+            }
+
+        }
+    }
+
+
+    function getProgramNum($Program_Name){
+        include "../connection.php";
+        $sql_query = "SELECT Program_Num FROM `programs` WHERE Name ='$Program_Name'";
+
+        $result = $db_conn->query($sql_query);
+
+        if ($result) {
+            // Loop through the results
+            while ($row = $result->fetch_assoc()) {
+                // Access individual columns in the current row
+                $Program_Num = $row["Program_Num"];
+                return $Program_Num;
+
+            }
+
+        }
+
+
+    }
 
     //Function called to display table of all certification that the 'UIN' passed in has or is taking
     function adminCertifications($UIN){
@@ -253,7 +290,7 @@
             <th>Level </th>
             <th>Status</th>
             <th>Traning_Status</th>
-            <th>Program_Num</th>
+            <th>Program</th>
             <th>Semester</th>
             <th>Year</th>
         </tr>";
@@ -274,7 +311,7 @@
             
             echo "<td><input type='text' name='Cert_StatusInput' value='" . $row["Status"] . "'></td>";
             echo "<td><input type='text' name='Cert_Training_StatusInput' value='" . $row["Training_Status"] . "'></td>";
-            echo "<td><input type='text' name='Cert_Program_NumInput' value='" . $row["Program_Num"] . "'></td>";
+            echo "<td><input type='text' name='Cert_Program_NumInput' value='" . getProgramName($row["Program_Num"]) . "'></td>";
             echo "<td><input type='text' name='Cert_SemesterInput' value='" . $row["Semester"] . "'></td>";
             echo "<td><input type='text' name='Cert_YearInput' value='" . $row["Year"] . "'></td>";
             echo "<td><input type='hidden' name='Cert_CertE_NumInput' value='" . $row["CertE_Num"] . "'>";
@@ -310,7 +347,7 @@
         $Cert_IDInput = getCertID($_POST['Cert_IDInput'],$_POST['Cert_LevelInput']);
         $Cert_StatusInput = $_POST['Cert_StatusInput'];
         $Cert_Traning_StatusInput = $_POST['Cert_Training_StatusInput'];
-        $Cert_Program_NumInput = $_POST['Cert_Program_NumInput'];
+        $Cert_Program_NumInput = getProgramNum($_POST['Cert_Program_NumInput']);
         $Cert_SemesterInput = $_POST['Cert_SemesterInput'];
         $Cert_YearInput = $_POST['Cert_YearInput'];
 
@@ -327,7 +364,7 @@
         $Cert_ID = getCertID($_POST['Cert_CertIDInsert'], $_POST['Cert_LevelInsert']);
         $Status = $_POST['Cert_StatusInsert'];
         $Training_Status = $_POST['Cert_Training_StatusInsert'];
-        $Program_Num = $_POST['Cert_Program_NumInsert'];
+        $Program_Num = getProgramNum($_POST['Cert_Program_NumInsert']);
         $Semester = $_POST['Cert_SemesterInput'];
         $Year = $_POST['Cert_YearInsert'];
 
