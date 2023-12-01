@@ -6,10 +6,11 @@
 
 
 
-<!-- Includes the php files needed so that the dont need to be included in the future -->
+<!-- Includes the php files needed so that they don't need to be included in the future -->
 <?php
     include "../connection.php";
     include "ProgramProgressHelper.php";
+    //$_POST = array();
 ?>
 
 <!DOCTYPE html>
@@ -33,6 +34,7 @@
         <!-- This php block makes sure that the UIN entered is valid and the stores that UIN in a session variable called UIN -->
             <form class="studentSelectionForm" action="ProgramProgress.php" method="POST">
                 <?php
+
 
                     session_start();
 
@@ -74,7 +76,7 @@
                 <label>UIN:</label>
                 <input type="text" id="UINInsert" name="UINInsert">
                     
-                <label>Class ID:</label>
+                <label>Class Name:</label>
                 <input type="text" id="Class_IDInsert" name="Class_IDInsert">
                 
                 <label>Status:</label>
@@ -91,7 +93,7 @@
                 
                 <input type="submit" value="Submit">
             </form>
-
+            
         </div>
     </div>
 
@@ -109,8 +111,11 @@
                     <label>UIN:</label>
                     <input type="text" id="Cert_UINInsert" name="Cert_UINInsert">
                     
-                    <label>Cert ID:</label>
+                    <label>Cert Name:</label>
                     <input type="text" id="Cert_CertIDInsert" name="Cert_CertIDInsert">
+
+                    <label>Cert Level:</label>
+                    <input type="text" id="Cert_LevelInsert" name="Cert_LevelInsert">
                     
                     <label>Status:</label>
                     <input type="text" id="Cert_StatusInsert" name="Cert_StatusInsert">
@@ -145,13 +150,16 @@
         ?>
         <br>
 
-        <!-- Insert form for adding certifications that queries the database on sumbit -->
-        <form class="Certification" action="ProgramProgress.php" method="POST">
+        <!-- Insert form for adding internships that queries the database on sumbit -->
+        <form class="Internships" action="ProgramProgress.php" method="POST">
             <label>UIN:</label>
             <input type="text" id="Intern_UINInsert" name="Intern_UINInsert">
             
-            <label>Intern ID:</label>
+            <label>Internship Name:</label>
             <input type="text" id="Intern_InternIDInsert" name="Intern_InternIDInsert">
+
+            <label>Employer:</label>
+            <input type="text" id="Intern_EmployerInsert" name="Intern_EmployerInsert">
             
             <label>Status:</label>
             <input type="text" id="Intern_StatusInsert" name="Intern_StatusInsert">
@@ -162,8 +170,6 @@
             <input type='hidden' name='InsertIntern' value='insertIntern'>
 
             <input type="submit" value="Submit">
-
-
         </form>
 
 

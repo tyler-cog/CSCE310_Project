@@ -1,3 +1,5 @@
+<!-- Code written by Sydney Beeler -->
+
 <?php
     session_start();
     $username = $_SESSION['username'];
