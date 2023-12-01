@@ -123,7 +123,7 @@
                     <label>Traning Status:</label>
                     <input type="text" id="Cert_Training_StatusInsert" name="Cert_Training_StatusInsert">
 
-                    <label>Program_Num:</label>
+                    <label>Program:</label>
                     <input type="text" id="Cert_Program_NumInsert" name="Cert_Program_NumInsert">
 
                     <label>Semester:</label>
@@ -178,7 +178,9 @@
 
     <div class="section">
         <h2>PROGRAMS</h2>
-        <p>Content for section 5 goes here.</p>
+        <!-- This calls the adminInternships function from the helper php file -->
+        
+
     </div>
 
     <div class="section">
