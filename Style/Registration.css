@@ -17,6 +17,13 @@ html, body {
     min-height: 120px;
 }
 
+.skinnyMaroonBar {
+    background-color: #500000;
+    display: flex;
+    min-height: 50px;
+    align-items: center;
+}
+
 img {
     height: 85%;
     min-height: 50px;
