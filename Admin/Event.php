@@ -9,6 +9,7 @@
     $event_time = "";
     $events = "";
     $num_rows = "";
+    $num_attend = "";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,8 +63,13 @@
                             //     echo '<div class="noError"></div>';
                             // }
                         ?>
-                        <label>UIN</label>
+                        <label>Organizer UIN</label>
                         <input class="textField" type="number" name="uin" step="1" value="<?php echo htmlspecialchars($uin); ?>" >
+                    </div>
+                    <div class="thirdInputBox">
+                        <div class="noError"></div>
+                        <label>Number of Attendees</label>
+                        <input class="textField" type="number" name="num_attend" value="<?php echo htmlspecialchars($num_attend); ?>" >
                     </div>
                     <div class="thirdInputBox">
                         <div class="noError"></div>
@@ -82,7 +88,7 @@
                     </div>
                     <div class="thirdInputBox">
                         <div class="noError"></div>
-                        <label>Event ID (blank unless updating) </label>
+                        <label>Event ID (blank unless updating / deleting) </label>
                         <input class="textField" type="number" name="event_id" value="<?php echo htmlspecialchars($event_id); ?>" >
                     </div>
                     <div class="greyDivider"></div>
@@ -116,6 +122,7 @@
                     <input class="submitBtn" type="submit" name="create_event" value="Create"> 
                     <input class="submitBtn" type="submit" name="update_event"value="Update">
                     <input class="submitBtn" type="submit" name="search_event" value="Search"> 
+                    <input class="submitBtn" type="submit" name="delete_event" value="Delete"> 
                 
                 </form>
                 <?php
@@ -130,16 +137,17 @@
                         $event_time = $_POST['event_time'];
                         $program_num = $_POST['program_num'];
                         $event_id = $_POST['event_id'];
-                        //$uin = (validUIN($_POST['uin'])) ? $_POST['uin'] : "";
-                        //$username = (validUsername($_POST['username'])) ? $_POST['username'] : "";
-                        
+                        $num_attend = $_POST['num_attend'];
+                 
                         if (isset($_POST['create_event'])){
-                            INSERT_Event($event_id, $uin, $program_num, $start_date, $event_time, $location, $end_date, $event_type);
+                            INSERT_Event($event_id, $uin, $program_num, $start_date, $event_time, $location, $end_date, $event_type, $num_attend);
+                            INSERT_tracking($uin, $num_attend);
                             echo displayEventsTable();
                         }
                         else if (isset($_POST['update_event'])){
                             if (validEventID($_POST['event_id'])){
                                 UPDATE_Event($event_id, $uin, $program_num, $start_date, $event_time, $location, $end_date, $event_type);
+                                UPDATE_tracking($uin, $event_id, $num_attend); 
                             }
                             else{
                                 echo '<div class="withError">
@@ -149,6 +157,17 @@
                             echo displayEventsTable();
                         }
                         else if (isset($_POST['search_event'])){
+                            echo displayEventsTable();
+                        }
+                        else if (isset($_POST['delete_event'])){
+                            if (validEventID($_POST['event_id'])){
+                                DELETE_Event($event_id);
+                            }
+                            else{
+                                echo '<div class="withError">
+                                        <div class="errorMessage">Current Event ID is invalid</div>
+                                    </div>';
+                            }
                             echo displayEventsTable();
                         }
 
