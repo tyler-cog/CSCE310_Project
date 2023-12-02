@@ -1,6 +1,27 @@
 <!-- Code written by Sydney Beeler -->
 
 <?php
+    function updateApplication() {
+        include "../connection.php";
+        
+        $ID = $_REQUEST['ID'];
+        $Uncom_Cert = $_REQUEST['Uncom_Cert'];
+        $Com_Cert = $_REQUEST['Com_Cert'];
+        $Purpose_Statement = $_REQUEST['Purpose_Statement'];
+        
+        $sql_query = "UPDATE application SET Uncom_Cert='$Uncom_Cert', Com_Cert='$Com_Cert', Purpose_Statement='$Purpose_Statement' WHERE App_Num=$ID";
+        $result = $db_conn->query($sql_query);
+    }
+
+
+    function deleteApplication() {
+        include "../connection.php";
+        
+        $ID = $_REQUEST['ID'];
+        $delete = $db_conn->query("DELETE FROM application WHERE App_Num=$ID");
+    }
+
+
     function displayApplicationsTable() {
         include "../connection.php";
 
@@ -8,7 +29,10 @@
         $username = $_SESSION['username'];
         
         $UIN = $db_conn->query("SELECT UIN FROM user WHERE Username='$username'")->fetch_assoc()['UIN'];
-        $applications = $db_conn->query("SELECT * FROM application WHERE UIN=$UIN"); 
+        $sql_query = "SELECT programs.Name, application.App_Num, application.Uncom_Cert, application.Com_Cert, application.Purpose_Statement 
+                      FROM application JOIN programs 
+                      ON application.Program_Num=programs.Program_Num AND application.UIN=$UIN";
+        $applications = $db_conn->query($sql_query); 
     
         $html = '<div><table border="1">
                     <thead>
@@ -24,10 +48,16 @@
         if ($applications && $applications->num_rows > 0) {
             while ($row = $applications->fetch_assoc()) {
                 $html .= "<tr>
-                            <td>" . $row['Program_Num'] . "</td>
-                            <td>" . $row['Uncom_Cert'] . "</td>
-                            <td>" . $row['Com_Cert'] . "</td>
-                            <td>" . $row['Purpose_Statement'] . "</td>
+                            <td>" . $row['Name'] . "</td>
+                            <form method='POST'>
+                                <td><input type='text' style='width:300px' name='Uncom_Cert' value='" . $row['Uncom_Cert'] . "'</td>
+                                <td><input type='text' style='width:300px' name='Com_Cert' value='" . $row['Com_Cert'] . "'</td>
+                                <td><input type='text' style='width:200px' name='Purpose_Statement' value='" . $row['Purpose_Statement'] . "'</td>
+                                <td><input type='hidden' name='ID' value='" . $row['App_Num'] . "'</td>
+
+                                <td><input type='submit' name='updateApplication' value='Update'></td>
+                                <td><input type='submit' name='deleteApplication' value='Delete'></td>
+                            </form>
                           </tr>";
             }
         } else {
@@ -62,4 +92,12 @@
         }
     }
 
+
+    //////////////////////////////////////////////////////////////////////////////
+    if(array_key_exists('updateApplication', $_POST)) {
+        updateApplication();
+    }
+    else if(array_key_exists('deleteApplication', $_POST)) {
+        deleteApplication();
+    }
 ?>
