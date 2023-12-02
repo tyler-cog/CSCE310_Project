@@ -15,15 +15,8 @@
 </head>
 <body>
     <div class="maroonBar">
-        <a href="../Student/StudentHome.php" title="Back">←</a>
+        <a class="arrow" href="../Student/StudentHome.php" title="Back">← Back</a>
     </div>
-
-<!-- 
-    a. Insert: Submit application forms for various programs.
-    b. Update: Edit application details as needed.
-    c. Select: Review their own application information and status.
-    d. Delete: Remove a program application 
--->
 
    <div class="greyBack"> 
         <div class="regBox">
@@ -31,7 +24,6 @@
             <div class="maroonDivider"></div>
 
             <!-- Review, edit, and delete applications -->
-            <!-- TODO--> 
             <div class="applicationTables">
                 <h2>Review, Edit, and Delete Applications</h2>
                 <br>

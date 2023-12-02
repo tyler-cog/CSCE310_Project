@@ -13,7 +13,7 @@
 </head>
 <body>
     <div class="maroonBar">
-        <a class="logout" href="../LoginPage/LoginPage.php" title="Logout" color=#C8C8C8>↩Logout</a>
+        <a class="arrow" href="../LoginPage/LoginPage.php" title="Logout">↩ Logout</a>
     </div>
 
    <div class="greyBack"> 

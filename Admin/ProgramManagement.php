@@ -15,7 +15,7 @@
 </head>
 <body>
     <div class="maroonBar">
-        <a href="../Admin/AdminHome.php" title="Back">←</a>
+        <a class="arrow" href="../Admin/AdminHome.php" title="Back">← Back</a>
     </div>
 
    <div class="greyBack"> 
