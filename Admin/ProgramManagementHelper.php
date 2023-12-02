@@ -140,7 +140,6 @@
     // Number of total program students
     // Minority participation
 
-
     // Courses taken by program students
     // Certifications of program students 
     // Number of students pursuing federal internships
@@ -151,29 +150,37 @@
 
         $ID = $_POST['ID'];
 
-        // get program name
+        // get program name and status 
         $sql_query = "SELECT Name, Status FROM programs WHERE Program_Num=$ID";
         $result = $db_conn->query($sql_query)->fetch_assoc(); 
         $program = $result['Name'];
         $status = $result['Status'];
-        echo "<br><br> Program: " . $program;
-        echo "<br> Program status: " . $status;
+        echo "<br><h4> Program: " . $program . "</h4>";
+        echo "Program status: " . $status;
 
-        // get program status
-
-        // get number of students in the program
-        $sql_query = "SELECT COUNT(*) as 'Student_Count' FROM track WHERE Program_Num=$ID";
-        $student_count = $db_conn->query($sql_query)->fetch_assoc()['Student_Count']; 
-        echo "<br> Students in program: " . $student_count;
-
-        // get student demographic information
-        $sql_query = "SELECT college_student.UIN, college_student.Gender, college_student.Hispanic_Latino, college_student.Race, college_student.First_Generation, college_student.US_Citizen
+        // create view showing all program students 
+        $sql_query = "CREATE OR REPLACE VIEW `Program Students` AS
+                      SELECT college_student.UIN, Gender, Hispanic_Latino, Race, First_Generation, US_Citizen, Major, GPA
                       FROM college_student 
                       JOIN track 
                       ON college_student.UIN=track.UIN 
                       AND track.Program_Num=$ID";
 
-        $demographics = $db_conn->query($sql_query);
+        $result = $db_conn->query($sql_query);
+        $students = $db_conn->query("SELECT * FROM `Program Students`");
+
+        // get number of students in the program
+        $sql_query = "SELECT COUNT(*) as 'Student_Count' FROM `Program Students`";
+        $student_count = $db_conn->query($sql_query)->fetch_assoc()['Student_Count']; 
+        echo "<br> Students in program: " . $student_count;
+
+        // get average GPA of students in the program 
+        $sql_query = "SELECT AVG(GPA) AS 'Avg_GPA' FROM `Program Students`";
+        $avg_GPA = $db_conn->query($sql_query)->fetch_assoc()['Avg_GPA'];
+        echo "<br> Average student GPA: " . $avg_GPA;
+
+        // get student demographic information
+        echo "<br><h4> Student demographics: </h4>";
 
         $html = '<div><table border="1">
                 <thead>
@@ -188,8 +195,8 @@
                 </thead>
                 <tbody>';
 
-        if ($demographics && $demographics->num_rows > 0) {
-            while ($row = $demographics->fetch_assoc()) {
+        if ($students && $students->num_rows > 0) {
+            while ($row = $students->fetch_assoc()) {
                 $HL = "No";
                 $first_gen = "No";
                 $citizen = "No";
@@ -216,10 +223,12 @@
         } else {
             $html .= "<tr><td colspan='8'>No students found.</td></tr>";
         }
-        
-        echo "<br><br> Student demographics: <br><br>";
+    
         echo $html;
         echo "</table>";
+
+        // get internship details for students in the program 
+        
 
         // get courses taken by students in the program
 
