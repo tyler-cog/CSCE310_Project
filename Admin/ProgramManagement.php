@@ -75,6 +75,15 @@
             
             <!-- Generate report for a specified program --> 
             <!-- TODO --> 
+            <!-- 
+                Number of total program students
+                Courses taken by program students
+                Certifications of program students 
+                Minority participation
+                Number of students pursuing federal internships
+                Student internships
+                Majors of program students
+            -->
             <div class="programReport">
                 <h2>Generate Report</h2>
                 <br>
@@ -83,6 +92,17 @@
                     <input type="int" name="ID" id="ID">
                     
                     <input type="submit" name="generateReport" value="Generate Report">
+
+                    <?php                        
+                        if (!empty($_POST['ID'])) {
+                            if (!(isValidProgramNum($_POST['ID']))) {
+                                echo '<br><br> ERROR: invalid Program ID.';
+                            }
+                            else{
+                                generateReport();
+                            }
+                        }
+                    ?>
                 </form>
             </div>
         </div>

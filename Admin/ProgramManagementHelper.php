@@ -122,6 +122,112 @@
 
 
     //////////////////////////////////////////////////////////////////////////////
+    function isValidProgramNum($ID) {
+        include "../connection.php";
+
+        $result = $db_conn->query("SELECT * FROM programs WHERE Program_Num=$ID");
+
+        if (!$result) {
+            die("Query failed: " . $db_conn->error);
+        }
+
+        if($result->num_rows == 1) {
+            return true;
+        }
+        return false;
+    }
+ 
+    // Number of total program students
+    // Minority participation
+
+
+    // Courses taken by program students
+    // Certifications of program students 
+    // Number of students pursuing federal internships
+    // Student internships
+    // Majors of program students
+    function generateReport() {
+        include "../connection.php";
+
+        $ID = $_POST['ID'];
+
+        // get program name
+        $sql_query = "SELECT Name, Status FROM programs WHERE Program_Num=$ID";
+        $result = $db_conn->query($sql_query)->fetch_assoc(); 
+        $program = $result['Name'];
+        $status = $result['Status'];
+        echo "<br><br> Program: " . $program;
+        echo "<br> Program status: " . $status;
+
+        // get program status
+
+        // get number of students in the program
+        $sql_query = "SELECT COUNT(*) as 'Student_Count' FROM track WHERE Program_Num=$ID";
+        $student_count = $db_conn->query($sql_query)->fetch_assoc()['Student_Count']; 
+        echo "<br> Students in program: " . $student_count;
+
+        // get student demographic information
+        $sql_query = "SELECT college_student.UIN, college_student.Gender, college_student.Hispanic_Latino, college_student.Race, college_student.First_Generation, college_student.US_Citizen
+                      FROM college_student 
+                      JOIN track 
+                      ON college_student.UIN=track.UIN 
+                      AND track.Program_Num=$ID";
+
+        $demographics = $db_conn->query($sql_query);
+
+        $html = '<div><table border="1">
+                <thead>
+                <tr>
+                    <th>UIN</th>
+                    <th>Gender</th>
+                    <th>Hispanic/Latino</th>
+                    <th>Race</th>
+                    <th>First Generation</th>
+                    <th>U.S. Citizen</th>
+                </tr>
+                </thead>
+                <tbody>';
+
+        if ($demographics && $demographics->num_rows > 0) {
+            while ($row = $demographics->fetch_assoc()) {
+                $HL = "No";
+                $first_gen = "No";
+                $citizen = "No";
+
+                if ($row['Hispanic_Latino'] == 1) {
+                    $HL = "Yes";
+                }
+                if ($row['First_Generation'] == 1) {
+                    $first_gen = "Yes";
+                } 
+                if ($row['US_Citizen'] == 1) {
+                    $citizen = "Yes";
+                }
+
+                $html .= "<tr>
+                        <td>" . $row['UIN'] . "</td>
+                        <td>" . $row['Gender'] . "</td>
+                        <td>" . $HL . "</td>
+                        <td>" . $row['Race'] . "</td>
+                        <td>" . $first_gen . "</td>
+                        <td>" . $citizen . "</td>
+                    </tr>";
+            }
+        } else {
+            $html .= "<tr><td colspan='8'>No students found.</td></tr>";
+        }
+        
+        echo "<br><br> Student demographics: <br><br>";
+        echo $html;
+        echo "</table>";
+
+        // get courses taken by students in the program
+
+        // get certification details for students in the program 
+    }
+
+
+    //////////////////////////////////////////////////////////////////////////////
     if(array_key_exists('updateProgram', $_POST)) {
         updateProgram();
     }
