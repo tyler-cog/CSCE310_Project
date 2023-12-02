@@ -111,12 +111,12 @@
             echo "<td><input type='text' name='YearInput' value='" . $row["Year"] . "'></td>";
             echo "<td><input type='hidden' name='CE_NumInput' value='" . $row["CE_Num"] . "'>";
             echo "<td><input type='hidden' name='UINInput' value='" . $row["UIN"] . "'>";
-            echo "<td><input type='hidden' name='UpdateCourseEnrollment' value='updateCourseEnrollment'>"; //the updateCourseEnrollment value triggerrs the if statment in the main part of this php file and puts all the values in the post array to be accesssed later
+            echo "<td><input type='hidden' name='UpdateCourseEnrollment' value='updateCourseEnrollment'>"; //value triggerrs the if statment in the main part of this php file and puts all the values in the post array to be accesssed later
             echo "<input type='submit' value='Update'></td>";
             echo "</form>";
             echo "<form action='ProgramProgress.php' method='post'>";
             echo "<td><input type='hidden' name='CE_Num' value='" . $row["CE_Num"] . "'>";
-            echo "<td><input type='hidden' name='DeleteCourseEnrollment' value='deleteCourseEnrollment'>"; //the deleteCourseEnrollment value triggerrs the if statment in the main part of this php file and puts all the values in the post array to be accesssed later
+            echo "<td><input type='hidden' name='DeleteCourseEnrollment' value='deleteCourseEnrollment'>"; //value triggerrs the if statment in the main part of this php file and puts all the values in the post array to be accesssed later
             echo "<input type='submit' value='Delete'></td>";
             echo "</form>";
             echo "</tr>";
@@ -297,7 +297,6 @@
 
 
         //For each loop that creates a table that not only displays the table but allows users to update and delete rows as needed
-
         foreach ($data as $row) {
             echo "<tr>";
             echo "<form action='ProgramProgress.php' method='post'>";
@@ -316,12 +315,12 @@
             echo "<td><input type='text' name='Cert_YearInput' value='" . $row["Year"] . "'></td>";
             echo "<td><input type='hidden' name='Cert_CertE_NumInput' value='" . $row["CertE_Num"] . "'>";
             echo "<td><input type='hidden' name='Cert_UINInput' value='" . $row["UIN"] . "'>";
-            echo "<td><input type='hidden' name='UpdateCertification' value='updateCertification'>"; //the updateCourseEnrollment value triggerrs the if statment in the main part of this php file and puts all the values in the post array to be accesssed later
+            echo "<td><input type='hidden' name='UpdateCertification' value='updateCertification'>"; //value triggerrs the if statment in the main part of this php file and puts all the values in the post array to be accesssed later
             echo "<input type='submit' value='Update'></td>";
             echo "</form>";
             echo "<form action='ProgramProgress.php' method='post'>";
             echo "<td><input type='hidden' name='CertE_Num' value='" . $row["CertE_Num"] . "'>";
-            echo "<td><input type='hidden' name='DeleteCertification' value='deleteCertification'>"; //the deleteCourseEnrollment value triggerrs the if statment in the main part of this php file and puts all the values in the post array to be accesssed later
+            echo "<td><input type='hidden' name='DeleteCertification' value='deleteCertification'>"; //value triggerrs the if statment in the main part of this php file and puts all the values in the post array to be accesssed later
             echo "<input type='submit' value='Delete'></td>";
             echo "</form>";
             echo "</tr>";
@@ -471,12 +470,12 @@
             echo "<td><input type='text' name='Intern_YearInput' value='" . $row["Year"] . "'></td>";
             echo "<td><input type='hidden' name='Intern_IA_NumInput' value='" . $row["IA_Num"] . "'>";
             echo "<td><input type='hidden' name='Intern_UINInput' value='" . $row["UIN"] . "'>";
-            echo "<td><input type='hidden' name='UpdateIntern' value='updateIntern'>"; //the updateCourseEnrollment value triggerrs the if statment in the main part of this php file and puts all the values in the post array to be accesssed later
+            echo "<td><input type='hidden' name='UpdateIntern' value='updateIntern'>"; //value triggerrs the if statment in the main part of this php file and puts all the values in the post array to be accesssed later
             echo "<input type='submit' value='Update'></td>";
             echo "</form>";
             echo "<form action='ProgramProgress.php' method='post'>";
             echo "<td><input type='hidden' name='IA_Num' value='" . $row["IA_Num"] . "'>";
-            echo "<td><input type='hidden' name='DeleteIntern' value='deleteIntern'>"; //the deleteCourseEnrollment value triggerrs the if statment in the main part of this php file and puts all the values in the post array to be accesssed later
+            echo "<td><input type='hidden' name='DeleteIntern' value='deleteIntern'>"; //value triggerrs the if statment in the main part of this php file and puts all the values in the post array to be accesssed later
             echo "<input type='submit' value='Delete'></td>";
             echo "</form>";
             echo "</tr>";
@@ -508,8 +507,6 @@
     }
 
     //Function that queries the database and inserts a new record into the intern_app table based on the values passed in by the admin
-    
-    
     function insertIntern(){
         include "../connection.php";
 
@@ -524,7 +521,190 @@
         
     }
 
+
+
+    function adminPrograms($UIN){
+        include "../connection.php";
+        $sql_query = "SELECT * FROM `track` WHERE `UIN` = '$UIN'";
+
+        $result = $db_conn->query($sql_query);
+
+
+        $data = array();
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $data[] = $row;
+            }
+        }
+
+        echo "<table border='1'>
+        <tr>
+            <th>Tracking Num</th>
+            <th>UIN</th>
+            <th>Program Name</th>
+        </tr>";
+
+
+        foreach ($data as $row){
+            echo "<tr>";
+            echo "<form action='ProgramProgress.php' method='post'>";
+            echo "<td>" . $row["Tracking_Num"] . "</td>";
+            echo "<td>" . $row["UIN"] . "</td>";
+
+            echo "<td><input type='text' name='Program_Program_NumInput' value='" . getProgramName($row["Program_Num"]) . "'></td>";
+            echo "<td><input type='hidden' name='Program_Tracking_NumInput' value='" . $row["Tracking_Num"] . "'>";
+            echo "<td><input type='hidden' name='Program_UINInput' value='" . $row["UIN"] . "'>";
+            echo "<td><input type='hidden' name='UpdateProgram' value='updateProgram'>"; //value triggerrs the if statment in the main part of this php file and puts all the values in the post array to be accesssed later
+            echo "<input type='submit' value='Update'></td>";
+            echo "</form>";
+
+            echo "<form action='ProgramProgress.php' method='post'>";
+            echo "<td><input type='hidden' name='Tracking_Num' value='" . $row["Tracking_Num"] . "'>";
+            echo "<td><input type='hidden' name='DeleteProgram' value='deleteProgram'>"; //value triggerrs the if statment in the main part of this php file and puts all the values in the post array to be accesssed later
+            echo "<input type='submit' value='Delete'></td>";
+            echo "</form>";
+            echo "</tr>";
+
+        }
+
+        echo "</table>";
+
+
+    }
+
+    //Function that queries the database and deletes the associated program a UIN is in given the Tracking_Num
+    function deleteProgram($Tracking_Num){
+        include "../connection.php";
+        $sql_query = "DELETE FROM `track` WHERE `Tracking_Num` = '$Tracking_Num'";
+        $result = $db_conn->query($sql_query);
+    }
+
+    //Function that queries the data base and updates a program track a UIN is in
+    function updateProgram(){
+        include "../connection.php";
+
+        $Tracking_Num = $_POST['Program_Tracking_NumInput'];
+        $UIN = $_POST['Program_UINInput'];
+        $Program_Num = getProgramNum($_POST['Program_Program_NumInput']);
+
+        $sql_query = "UPDATE `track` SET Program_Num='$Program_Num' WHERE Tracking_Num='$Tracking_Num' AND UIN='$UIN'";
+        $result = $db_conn->query($sql_query);
+
+
+    }
+
+    //Function that queries the data base and inserts a new record into the track table
+    function insertProgram(){
+
+        include "../connection.php";
+        $UIN = $_POST['Program_UINInsert'];
+
+        $Program_Num = getProgramNum($_POST['Program_Program_NameInsert']);
+        $sql_query = "INSERT INTO `track` (Program_Num, UIN) VALUES ($Program_Num, $UIN)";
+
+        $result = $db_conn->query($sql_query);
+
+
+    }
     
+
+    //Function called to display table of all applications that a UIN has submitted
+    function adminApplication($UIN){
+        include "../connection.php";
+
+
+        $sql_query = "SELECT * FROM `application` WHERE `UIN` = '$UIN'";
+        $result = $db_conn->query($sql_query);
+
+        $data = array();
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $data[] = $row;
+            }
+        }
+
+        echo "<table border='1'>
+        <tr>
+            <th>App_Num</th>
+            <th>UIN</th>
+            <th>Program Name</th>
+            <th>Uncompleted Certs</th>
+            <th>Completed Certs</th>
+            <th>Purpose Statement</th>
+        </tr>";
+
+        foreach ($data as $row){
+
+            echo "<tr>";
+            echo "<form action='ProgramProgress.php' method='post'>";
+            echo "<td>" . $row["App_Num"] . "</td>";
+            echo "<td>" . $row["UIN"] . "</td>";
+           
+            echo "<td><input type='text' name='Application_Program_NumInput' value='" . getProgramName($row["Program_Num"]) . "'></td>";
+            echo "<td><input type='text' name='Application_Uncom_CertInput' value='" . $row["Uncom_Cert"] . "'></td>";
+            echo "<td><input type='text' name='Application_Com_CertInput' value='" . $row["Com_Cert"] . "'></td>";
+            echo "<td><input type='text' name='Application_Purpose_StatementInput' value='" . $row["Purpose_Statement"] . "'></td>";
+            echo "<td><input type='hidden' name='Application_App_NumInput' value='" . $row["App_Num"] . "'>";
+            echo "<td><input type='hidden' name='Application_UINInput' value='" . $row["UIN"] . "'>";
+            echo "<td><input type='hidden' name='UpdateApplication' value='updateApplication'>"; //value triggerrs the if statment in the main part of this php file and puts all the values in the post array to be accesssed later
+            echo "<input type='submit' value='Update'></td>";
+            echo "</form>";
+
+            echo "<form action='ProgramProgress.php' method='post'>";
+            echo "<td><input type='hidden' name='App_Num' value='" . $row["App_Num"] . "'>";
+            echo "<td><input type='hidden' name='DeleteApplication' value='deleteApplication'>"; //value triggerrs the if statment in the main part of this php file and puts all the values in the post array to be accesssed later
+            echo "<input type='submit' value='Delete'></td>";
+            echo "</form>";
+            echo "</tr>";
+        }
+
+        echo "</table>";
+
+    }
+
+    //Function that queries the database and deletes the specific application a UIN has given the App_Num
+    function deleteApplication($App_Num){
+        include "../connection.php";
+        $sql_query = "DELETE FROM `application` WHERE App_Num = '$App_Num'";
+        $result = $db_conn->query($sql_query);
+    }
+
+
+    //Function that queires the database and updates the specific entry inside the applications table
+    function updateApplication(){
+        include "../connection.php";
+
+        $App_Num = $_POST['Application_App_NumInput'];
+        $UIN = $_POST['Application_UINInput'];
+        $Program_Num = getProgramNum($_POST['Application_Program_NumInput']);
+        $Uncom_Cert = $_POST['Application_Uncom_CertInput'];
+        $Com_Cert = $_POST['Application_Com_CertInput'];
+        $Purpose_Statment = $_POST['Application_Purpose_StatementInput'];
+
+        $sql_query = "UPDATE `application` SET Program_Num='$Program_Num', Uncom_Cert='$Uncom_Cert', Com_Cert='$Com_Cert', Purpose_Statement='$Purpose_Statment' WHERE App_Num='$App_Num' AND UIN='$UIN'";
+        $result = $db_conn->query($sql_query);
+    }
+
+
+    //Function that queiers the database and inserts a record into the applications table
+    function insertApplication(){
+        include "../connection.php";
+
+        $UIN = $_POST['Application_UINInsert'];
+        $Program_Num = getProgramNum($_POST['Application_Program_NameInsert']);
+        $Uncom_Cert = $_POST['Application_Uncom_CertInsert'];
+        $Com_Cert = $_POST['Application_Com_CertInsert'];
+        $Purpose_Statment = $_POST['Application_Purpose_StatementInsert'];
+
+        $sql_query = "INSERT INTO `application` (Program_Num, UIN, Uncom_Cert, Com_Cert, Purpose_Statement) VALUES ($Program_Num, $UIN, '$Uncom_Cert', '$Com_Cert', '$Purpose_Statment')";
+        $result = $db_conn->query($sql_query);
+
+    }
+
+
+
     //Main part of the php file, when a submit button is pressed the values contained within the input determine which function should be called
     if(array_key_exists('DeleteCourseEnrollment',$_POST)){
         deleteCourseEnrollment($_POST['CE_Num']);
@@ -552,6 +732,24 @@
     }
     else if(array_key_exists('InsertIntern',$_POST)){
         insertIntern();
+    }
+    else if(array_key_exists('DeleteProgram',$_POST)){
+        deleteProgram($_POST['Tracking_Num']);
+    }
+    else if(array_key_exists('UpdateProgram',$_POST)){
+        updateProgram();
+    }
+    else if(array_key_exists('InsertProgram',$_POST)){
+        insertProgram();
+    }
+    else if(array_key_exists('DeleteApplication',$_POST)){
+        deleteApplication($_POST['App_Num']);
+    }
+    else if(array_key_exists('UpdateApplication',$_POST)){
+        updateApplication();
+    }
+    else if(array_key_exists('InsertApplication',$_POST)){
+        insertApplication();
     }
 
 ?>
