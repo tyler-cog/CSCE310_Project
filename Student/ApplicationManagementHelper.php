@@ -29,7 +29,7 @@
         $username = $_SESSION['username'];
         
         $UIN = $db_conn->query("SELECT UIN FROM user WHERE Username='$username'")->fetch_assoc()['UIN'];
-        $sql_query = "SELECT programs.Name, application.App_Num, application.Uncom_Cert, application.Com_Cert, application.Purpose_Statement 
+        $sql_query = "SELECT programs.Name, programs.Program_Num, application.App_Num, application.Uncom_Cert, application.Com_Cert, application.Purpose_Statement 
                       FROM application JOIN programs 
                       ON application.Program_Num=programs.Program_Num AND application.UIN=$UIN";
         $applications = $db_conn->query($sql_query); 
@@ -41,18 +41,27 @@
                         <th>Uncompleted Certifications</th>
                         <th>Completed Certifications</th>
                         <th>Purpose Statement</th>
+                        <th>Application Status</th>
                     </tr>
                     </thead>
                     <tbody>';
     
         if ($applications && $applications->num_rows > 0) {
             while ($row = $applications->fetch_assoc()) {
+                $ID = $row['Program_Num'];
+                $result = $db_conn->query("SELECT * FROM track WHERE track.Program_Num=$ID AND track.UIN=$UIN");
+                $status = "Submitted";
+                if ($result->num_rows > 0) {
+                    $status = "Accepted";
+                }
+
                 $html .= "<tr>
-                            <td>" . $row['Name'] . "</td>
                             <form method='POST'>
+                                <td>" . $row['Name'] . "</td>
                                 <td><input type='text' style='width:300px' name='Uncom_Cert' value='" . $row['Uncom_Cert'] . "'</td>
                                 <td><input type='text' style='width:300px' name='Com_Cert' value='" . $row['Com_Cert'] . "'</td>
                                 <td><input type='text' style='width:200px' name='Purpose_Statement' value='" . $row['Purpose_Statement'] . "'</td>
+                                <td>" . $status . "</td>
                                 <td><input type='hidden' name='ID' value='" . $row['App_Num'] . "'</td>
 
                                 <td><input type='submit' name='updateApplication' value='Update'></td>
