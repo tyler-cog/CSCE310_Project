@@ -24,6 +24,7 @@
             <a href="../Student/ApplicationManagement.php" color=black>Application Management</a>
             <a href="../Student/DocManagement.php" color=black>Document Management</a>
             <a href="../Student/Profile.php" color=black>User Profile Page</a>
+            <a href="../Student/ProgramProgress.php" color=black>Program Progress Page</a>
         </div>
     </div>
 </body>
