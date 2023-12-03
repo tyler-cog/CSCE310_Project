@@ -141,12 +141,11 @@
     // Minority participation
     // Courses taken by program students
     // Majors of program students
-
+    // Student internships
 
     // Certifications of program students 
 
     // Number of students pursuing federal internships
-    // Student internships
 
     function generateReport() {
         include "../connection.php";
@@ -289,12 +288,144 @@
         echo "</table>";
 
 
-        // TODO: get internship details for students in the program 
+        // get internship stats
         echo "<br><h4> Student internships: </h4>";
 
+        $sql_query = "CREATE OR REPLACE VIEW `Internships` AS
+                      SELECT internship.Is_Gov, intern_app.Status 
+                      FROM internship 
+                      JOIN intern_app 
+                      ON internship.Intern_ID=intern_app.Intern_ID 
+                      JOIN `Program Students`
+                      ON intern_app.UIN=`Program Students`.UIN";
+        $result = $db_conn->query($sql_query);
 
-        // TODO: get certification details for students in the program 
+        $sql_query = "SELECT COUNT(*) as 'Num_Internships' FROM `Internships` WHERE Status='Offer accepted'";
+        $intern_count = $db_conn->query($sql_query)->fetch_assoc()['Num_Internships']; 
+        echo "Students with accepted internships: " . $intern_count . "<br>";
+
+        $sql_query = "SELECT COUNT(*) as 'Num_Federal' FROM `Internships` WHERE Is_Gov=0x01 AND Status='Offer accepted'";
+        $federal_count = $db_conn->query($sql_query)->fetch_assoc()['Num_Federal']; 
+        echo "Students with accepted federal internships: " . $federal_count . "<br><br>";
+        
+
+        // get internship details for students in the program 
+        $students = $db_conn->query("SELECT * FROM `Program Students`");
+        $intern_table = '<div><table border="1">
+                <thead>
+                <tr>
+                    <th>UIN</th>
+                    <th>Internships</th>
+                </tr>
+                </thead>
+                <tbody>';
+
+        if ($students && $students->num_rows > 0) {
+            while ($row = $students->fetch_assoc()) {
+                $UIN = $row['UIN'];
+                $sql_query = "SELECT internship.Name, internship.Description, internship.Employer, intern_app.Status,
+                                     IF(internship.Is_Gov = 0x01, 'Yes', 'No') AS 'Is_Gov' 
+                              FROM internship 
+                              JOIN intern_app 
+                              WHERE internship.Intern_ID=intern_app.Intern_ID 
+                              AND intern_app.UIN=$UIN";
+                $internships = $db_conn->query($sql_query);
+
+                $intern_table .= "<tr>
+                        <td>" . $row['UIN'] . "</td>
+                        <td>";
+                            if($internships->num_rows > 0) {
+                                $intern_table .= "<table border='1'>
+                                <thead>
+                                <tr>
+                                    <th>Role</th>
+                                    <th>Employer</th>
+                                    <th>Description</th>
+                                    <th>Federal</th>
+                                    <th>Application Status</th>
+                                </tr>
+                                </thead>";
+                                while($internship_row = $internships->fetch_assoc()) {
+                                    $intern_table .= "<tr>
+                                                        <td>" . $internship_row['Name'] . "</td>
+                                                        <td>" . $internship_row['Employer'] . "</td>
+                                                        <td>" . $internship_row['Description'] . "</td>
+                                                        <td>" . $internship_row['Is_Gov'] . "</td>
+                                                        <td>" . $internship_row['Status'] . "</td>
+                                                      </tr>";
+                                }
+                                $intern_table .= "</table>";
+                            }
+                $intern_table .= "
+                        </td>
+                    </tr>";
+            }
+        } else {
+            $intern_table .= "<tr><td colspan='8'>No students found.</td></tr>";
+        }
+
+        echo $intern_table;
+        echo "</table>";
+
+
+        // get certification details for students in the program 
         echo "<br><h4> Student program certifications: </h4>";
+        $students = $db_conn->query("SELECT * FROM `Program Students`");
+        $cert_table = '<div><table border="1">
+                <thead>
+                <tr>
+                    <th>UIN</th>
+                    <th>Program Certifications</th>
+                </tr>
+                </thead>
+                <tbody>';
+
+        if ($students && $students->num_rows > 0) {
+            while ($row = $students->fetch_assoc()) {
+                $UIN = $row['UIN'];
+                $sql_query = "SELECT certification.Level, certification.Name, certification.Description, 
+                                     cert_enrollment.Status, cert_enrollment.Training_Status
+                      FROM certification JOIN cert_enrollment 
+                      WHERE cert_enrollment.Cert_ID=certification.Cert_ID 
+                      AND cert_enrollment.UIN=$UIN
+                      AND cert_enrollment.Program_Num=$ID";
+                $certifications = $db_conn->query($sql_query);
+
+                $cert_table .= "<tr>
+                        <td>" . $row['UIN'] . "</td>
+                        <td>";
+                            if($certifications->num_rows > 0) {
+                                $cert_table .= "<table border='1'>
+                                <thead>
+                                <tr>
+                                    <th>Level</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Status</th>
+                                    <th>Training Status</th>
+                                </tr>
+                                </thead>";
+                                while($cert_row = $certifications->fetch_assoc()) {
+                                    $cert_table .= "<tr>
+                                                        <td>" . $cert_row['Level'] . "</td>
+                                                        <td>" . $cert_row['Name'] . "</td>
+                                                        <td>" . $cert_row['Description'] . "</td>
+                                                        <td>" . $cert_row['Status'] . "</td>
+                                                        <td>" . $cert_row['Training_Status'] . "</td>
+                                                      </tr>";
+                                }
+                                $cert_table .= "</table>";
+                            }
+                $cert_table .= "
+                        </td>
+                    </tr>";
+            }
+        } else {
+            $cert_table .= "<tr><td colspan='8'>No students found.</td></tr>";
+        }
+
+        echo $cert_table;
+        echo "</table>";
     }
 
 
