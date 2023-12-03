@@ -169,25 +169,32 @@
     }
     function get_Documents() {
         include "../connection.php";
-        // session_start();
-    
-        // Get the UIN of the current user using the get_UIN() function
         $currentUserUIN = get_UIN();  // Assuming get_UIN() is defined in the scope
-        // echo "Current User's UIN: " . htmlspecialchars($currentUserUIN) . "<br>";
+
+        $sql_view = "CREATE OR REPLACE VIEW user_documents AS
+            SELECT d.Doc_Num, d.App_Num, d.Link, d.Doc_Type, a.UIN
+            FROM document d
+            JOIN application a ON d.App_Num = a.App_Num";
+
+        if ($db_conn->query($sql_view) === TRUE) {
+            
+        } else {
+            echo "Error creating view: " . $db_conn->error;
+        }
+
         if ($currentUserUIN) {
-            // Prepare the SQL statement to fetch documents associated with the user's UIN
-            $sql = "SELECT * FROM document WHERE App_Num IN (SELECT App_Num FROM application WHERE UIN = ?)";
+            // Prepare the SQL statement to fetch documents from the view
+            $sql = "SELECT * FROM user_documents WHERE UIN = ?";
             $stmt = $db_conn->prepare($sql);
             $stmt->bind_param("s", $currentUserUIN);
             $stmt->execute();
             $result = $stmt->get_result();
+    
             // Fetch and return the documents
             $documents = [];
             while ($row = $result->fetch_assoc()) {
                 $documents[] = $row;
             }
-            // Echo the results for debugging
-            // echo "<pre>Documents: " . print_r($documents, true) . "</pre>";
             return $documents;
         } else {
             echo "No user found or no documents associated with the user.";
