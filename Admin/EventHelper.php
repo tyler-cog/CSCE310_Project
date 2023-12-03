@@ -192,11 +192,20 @@
 
     function GET_All_Events() {
         include "../connection.php"; // Adjust the path as necessary
-    
-        // Modify the query to retrieve events along with event tracking information
-        $sql_query = "SELECT event.*, event_tracking.ET_Num
-                      FROM event
-                      LEFT JOIN event_tracking ON event.Event_ID = event_tracking.Event_ID";
+        
+        $sql_view = "CREATE OR REPLACE VIEW all_events_view AS
+            SELECT event.*, event_tracking.ET_Num
+            FROM event
+            LEFT JOIN event_tracking ON event.Event_ID = event_tracking.Event_ID";
+
+        if ($db_conn->query($sql_view) === TRUE) {
+                    
+        } else {
+            echo "Error creating view: " . $db_conn->error;
+        }
+
+        // Modify the query to retrieve events from the view
+        $sql_query = "SELECT * FROM all_events_view";
     
         $result = $db_conn->query($sql_query);
     
