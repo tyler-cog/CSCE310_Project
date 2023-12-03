@@ -199,38 +199,5 @@
 
     </div>
 
-    <div class="section">
-        <h2>PROGRAM APPLICATIONS</h2>
-        <!-- This calls the adminApplications function from the helper php file -->
-        <?php
-            adminApplication($_SESSION["UIN"]);
-        ?>
-
-        <br>
-
-        <!-- Insert for for adding application that queieres the database on submit -->
-        <form class="Applications" action="ProgramProgress.php" method="POST">
-            <label>UIN:</label>
-            <input type="text" id="Application_UINInsert" name="Application_UINInsert">
-            
-            <label>Program Name:</label>
-            <input type="text" id="Application_Program_NameInsert" name="Application_Program_NameInsert">
-
-            <label>Uncompleted Certifications:</label>
-            <input type="text" id="Application_Uncom_CertInsert" name="Application_Uncom_CertInsert">
-
-            <label>Completed Certifications:</label>
-            <input type="text" id="Application_Com_CertInsert" name="Application_Com_CertInsert">
-
-            <label>Purpose Statement:</label>
-            <input type="text" id="Application_Purpose_StatementInsert" name="Application_Purpose_StatementInsert">
-
-            <input type='hidden' name='InsertApplication' value='insertApplication'>
-
-            <input type="submit" value="Submit">
-        </form>
-
-
-    </div>
 </body>
 </html>
