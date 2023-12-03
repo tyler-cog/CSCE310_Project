@@ -51,7 +51,7 @@ Currently cant add other docs that arent in Application is that ok? - if not in 
                     </div>
                     <div class="thirdInputBox">
                         <div class="noError"></div>
-                        <label>Doc Number (blank unless updating) </label>
+                        <label>Doc Number (blank unless updating / deleting) </label>
                         <input class="textField" type="number" name="doc_num" value="<?php echo htmlspecialchars($doc_num); ?>" >
                     </div>
                     <div class="greyDivider"></div>
