@@ -50,8 +50,6 @@
         $ID = $_REQUEST['ID'];
         
         $delete = $db_conn->query("DELETE FROM programs WHERE Program_Num='$ID'");
-
-        // TODO update usage in application, track, event, cert_enrollment
     }
 
 
@@ -137,15 +135,6 @@
         return false;
     }
  
-    // Number of total program students
-    // Minority participation
-    // Courses taken by program students
-    // Majors of program students
-    // Student internships
-
-    // Certifications of program students 
-
-    // Number of students pursuing federal internships
 
     function generateReport() {
         include "../connection.php";
