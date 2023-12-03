@@ -291,11 +291,11 @@
 
         $sql_query = "SELECT COUNT(*) as 'Num_Internships' FROM `Internships` WHERE Status='Offer accepted'";
         $intern_count = $db_conn->query($sql_query)->fetch_assoc()['Num_Internships']; 
-        echo "Students with accepted internships: " . $intern_count . "<br>";
+        echo "Number of accepted internships for program students: " . $intern_count . "<br>";
 
         $sql_query = "SELECT COUNT(*) as 'Num_Federal' FROM `Internships` WHERE Is_Gov=0x01 AND Status='Offer accepted'";
         $federal_count = $db_conn->query($sql_query)->fetch_assoc()['Num_Federal']; 
-        echo "Students with accepted federal internships: " . $federal_count . "<br><br>";
+        echo "Number of accepted federal internships for program students: " . $federal_count . "<br><br>";
         
 
         // get internship details for students in the program 
