@@ -21,10 +21,10 @@
             <p class="regWord">ADMIN HOME</p>
             <div class="maroonDivider"></div>
 
-            <a href="../Admin/ProgramProgress.php" color=black>Program Progress Tracking</a>
-            <a href="../Admin/ProgramManagement.php" color=black>Program Information Management</a>
-            <a href="../Admin/Event.php" color=black>Event Management</a>
             <a href="../Admin/UserManagement.php" color=black>User Management</a>
+            <a href="../Admin/ProgramManagement.php" color=black>Program Information Management</a>
+            <a href="../Admin/ProgramProgress.php" color=black>Program Progress Tracking</a>
+            <a href="../Admin/Event.php" color=black>Event Management</a>
         </div>
     </div>
 </body>
