@@ -522,14 +522,26 @@
     }
 
 
-
+    //Function that queires the database and inserts a new record into the track table based on the UIN inserted
     function adminPrograms($UIN){
+
+
+        
         include "../connection.php";
-        $sql_query = "SELECT * FROM `track` WHERE `UIN` = '$UIN'";
 
-        $result = $db_conn->query($sql_query);
+        $sql_query = "CREATE OR REPLACE VIEW `Student Programs` AS
+                      SELECT track.Program_Num, UIN, Tracking_Num, Name
+                      FROM track
+                      JOIN programs
+                      ON track.Program_Num=programs.Program_Num
+                      AND UIN=$UIN";
+        
+        $view = $db_conn->query($sql_query);
+
+        $result = $db_conn->query("SELECT * FROM `Student Programs`");
 
 
+        
         $data = array();
 
         if ($result->num_rows > 0) {
@@ -552,7 +564,7 @@
             echo "<td>" . $row["Tracking_Num"] . "</td>";
             echo "<td>" . $row["UIN"] . "</td>";
 
-            echo "<td><input type='text' name='Program_Program_NumInput' value='" . getProgramName($row["Program_Num"]) . "'></td>";
+            echo "<td><input type='text' name='Program_Program_NumInput' value='" . $row["Name"] . "'></td>";
             echo "<td><input type='hidden' name='Program_Tracking_NumInput' value='" . $row["Tracking_Num"] . "'>";
             echo "<td><input type='hidden' name='Program_UINInput' value='" . $row["UIN"] . "'>";
             echo "<td><input type='hidden' name='UpdateProgram' value='updateProgram'>"; //value triggerrs the if statment in the main part of this php file and puts all the values in the post array to be accesssed later
@@ -569,8 +581,6 @@
         }
 
         echo "</table>";
-
-
     }
 
     //Function that queries the database and deletes the associated program a UIN is in given the Tracking_Num
