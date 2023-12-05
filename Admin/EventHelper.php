@@ -1,3 +1,5 @@
+// Code Written By: Tyler Roosth
+
 <?php
     function validUIN($uin){
         include "../connection.php";
