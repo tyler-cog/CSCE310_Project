@@ -1,3 +1,5 @@
+// Code Written By: Tyler Roosth
+
 <?php
     $uin = "";
     $event_id = "";
