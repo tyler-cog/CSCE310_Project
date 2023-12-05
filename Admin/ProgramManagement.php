@@ -40,6 +40,9 @@
                     else if(array_key_exists('selectAllPrograms', $_POST)) {
                         displayProgramsTable($active=FALSE);
                     }
+                    else {
+                        displayProgramsTable($active=FALSE);
+                    }
                 ?>
             </div>
             

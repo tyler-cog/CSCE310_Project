@@ -56,9 +56,11 @@
     function displayProgramsTable($active) {
         if ($active) {
             $programs = selectActivePrograms();
+            echo "Active program details: <br>";
         }
         else {
             $programs = selectAllPrograms();
+            echo "All program details: <br>";
         }
         
         $html = '<div><table border="1">
