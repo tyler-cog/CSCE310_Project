@@ -36,6 +36,97 @@
 
     }
 
+    function PersonalProfileView($UINView){
+        require_once "../Student/ProfileHelper.php";
+
+        $origUINView = $UINView;
+        $UINView = substr($UINView, 0, -4);
+
+        $UserInfo = SELECT_User($UINView);
+
+        $first_name = $UserInfo['First_Name'];
+        $m_initial = $UserInfo['M_Initial'];
+        $last_name = $UserInfo['Last_Name'];
+        $uin = $UserInfo['UIN'];
+        $email = $UserInfo['Email'];
+        $discord_name = $UserInfo['Discord_Name'];
+        $username = $UserInfo['Username'];
+        $password = $UserInfo['Password'];
+
+        
+
+
+       
+        echo '<form class="regForm" action="UserManagement.php" method="POST">
+                <div class="thirdInputBox">
+                    <div class="noError"></div>
+                    <label>First Name</label>
+                    <input class="textField" type="text" name="first_name" value="' . $first_name . '" required>
+                </div>
+                <div class="thirdInputBox">
+                    <div class="noError"></div>
+                    <label>Middle Initial</label>
+                    <input class="textField" type="text" name="m_initial" value="' . $m_initial . '" required>
+                </div>
+                <div class="thirdInputBox">
+                    <div class="noError"></div>
+                    <label>Last Name</label>
+                    <input class="textField" type="text" name="last_name" value="' . $last_name . '" required>
+                </div>
+                <div class="thirdInputBox">
+                    <div class="noError"></div>
+                    <label>UIN</label>
+                    <input class="textField" type="number" name="uin" step="1" value="' . $uin . '" readonly>
+                </div>
+                <div class="thirdInputBox">
+                    <div class="noError"></div>
+                    <label>Email</label>
+                    <input class="textField" type="text" name="email" value="' .  $email . '" required>
+                </div>
+                <div class="thirdInputBox">
+                    <div class="noError"></div>
+                    <label>Discord</label>
+                    <input class="textField" type="text" name="discord_name" value="' . $discord_name . '" required>
+                </div>
+
+                <div class="greyDivider"></div>
+
+
+                <div class="halfInputBox">';
+
+                        
+                if (isset($_POST['username'])) {
+                    if (!validUsername($_POST['username'], getUINFromUser($_SESSION['username']))){
+                        echo '<div class="withError">
+                                <div class="errorMessage">Username already taken</div>
+                            </div>';
+                    }
+                    else {
+                        echo '<div class="noError"></div>';
+                    }
+                }
+
+                else {
+                    echo '<div class="noError"></div>';
+                }
+
+                    echo '
+                    <label>Username</label>
+                    <input class="textField" type="text" name="username" value="' . $username . '" required>
+                </div>
+                <div class="halfInputBox">
+                    <div class="noError"></div>
+                    <label>Password</label>
+                    <input class="textField" type="text" name="password" value="' . $password . '" required>
+                </div>
+
+
+                <input class="submitBtn" type="submit" value="Update" name="AdminViewUpdate">
+                <input class="submitBtn" type="submit" value="Delete" name="AdminViewDelete">
+            
+            </form>';
+    }
+
     function ProfileView($UINView){
         require_once "../Student/ProfileHelper.php";
 

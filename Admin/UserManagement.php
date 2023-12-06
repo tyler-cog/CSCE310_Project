@@ -1,8 +1,33 @@
 <?php
     require_once "../Student/ProfileHelper.php";
+
+    if (isset($_POST['AdminViewUpdate'])){
+        $first_name = $_POST['first_name'];
+        $m_initial = $_POST['m_initial'];
+        $last_name = $_POST['last_name'];
+        $uin = $_POST['uin'];
+        $email = $_POST['email'];
+        $discord_name = $_POST['discord_name'];
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+       
+
+        $username = (validUsername($_POST['username'], $uin)) ? $_POST['username'] : "";
+
+
+        if (validUsername($_POST['username'], $uin)){
+
+            UPDATE_User($uin, $first_name, $m_initial, $last_name, $username, $password, "Admin", $email, $discord_name);
+            $_SESSION['username'] = $username;
+        }
+    }
+
+    else if (isset($_POST['AdminViewDelete'])){
+
+    }
     
     // Code that runs if there is an update
-    if (isset($_POST['UINViewUpdate'])){
+    else if (isset($_POST['UINViewUpdate'])){
         $first_name = $_POST['first_name'];
         $m_initial = $_POST['m_initial'];
         $last_name = $_POST['last_name'];
@@ -206,6 +231,7 @@
                             // If user is an Admin
                             if ($user["User_Type"] == "Admin"){
                                 echo "Admin Editing " . $UINView;
+                                PersonalProfileView($UINView);
                                 
                             }
 
