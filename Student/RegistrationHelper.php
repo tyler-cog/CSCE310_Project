@@ -83,7 +83,7 @@
         include "../connection.php";
 
         $sql_query = "INSERT INTO college_student 
-        (UIN, Gender, `Hispanic/Latino`, Race, `U.S._Citizen`, First_Generation, DoB, GPA, 
+        (UIN, Gender, `Hispanic_Latino`, Race, `US_Citizen`, First_Generation, DoB, GPA, 
         Major, Minor_1, Minor_2, Expected_Graduation, School, Current_Classification, 
         Student_Type, Phone) 
         VALUES 

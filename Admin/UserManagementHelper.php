@@ -250,34 +250,31 @@
         $origUINView = $UINView;
         $UINView = substr($UINView, 0, -4);
 
-        $CollegeStudentInfo = SELECT_CollegeStudent($UINView);
-        $UserInfo = SELECT_User($UINView);
-
-
-
-        $first_name = $UserInfo['First_Name'];
-        $m_initial = $UserInfo['M_Initial'];
-        $last_name = $UserInfo['Last_Name'];
-        $uin = $UserInfo['UIN'];
-        $email = $UserInfo['Email'];
-        $discord_name = $UserInfo['Discord_Name'];
-        $username = $UserInfo['Username'];
-        $password = $UserInfo['Password'];
-        $gender = $CollegeStudentInfo['Gender'];
-        $hispanic_latino = convertToBoolean($CollegeStudentInfo['Hispanic/Latino']) ? 'checked' : '';
-        $race = $CollegeStudentInfo['Race'];
-        $us_citizen = convertToBoolean($CollegeStudentInfo['U.S._Citizen']) ? 'checked' : '';
-        $dob = $CollegeStudentInfo['DoB'];
-        $first_gen = convertToBoolean($CollegeStudentInfo['First_Generation']) ? 'checked' : '';
-        $gpa = $CollegeStudentInfo['GPA'];
-        $major = $CollegeStudentInfo['Major'];
-        $minor1 = $CollegeStudentInfo['Minor_1'];
-        $minor2 = $CollegeStudentInfo['Minor_2'];
-        $exp_grad = $CollegeStudentInfo['Expected_Graduation'];
-        $school = $CollegeStudentInfo['School'];
-        $curr_class = $CollegeStudentInfo['Current_Classification'];
-        $student_type = $CollegeStudentInfo['Student_Type'];
-        $phone = $CollegeStudentInfo['Phone'];
+        $StudentInfo = SELECT_ViewStudent($UINView);
+    
+        $first_name = $StudentInfo['First_Name'];
+        $m_initial = $StudentInfo['M_Initial'];
+        $last_name = $StudentInfo['Last_Name'];
+        $uin = $StudentInfo['UIN'];
+        $email = $StudentInfo['Email'];
+        $discord_name = $StudentInfo['Discord_Name'];
+        $username = $StudentInfo['Username'];
+        $password = $StudentInfo['Password'];
+        $gender = $StudentInfo['Gender'];
+        $hispanic_latino = convertToBoolean($StudentInfo['Hispanic_Latino']) ? 'checked' : '';
+        $race = $StudentInfo['Race'];
+        $us_citizen = convertToBoolean($StudentInfo['US_Citizen']) ? 'checked' : '';
+        $dob = $StudentInfo['DoB'];
+        $first_gen = convertToBoolean($StudentInfo['First_Generation']) ? 'checked' : '';
+        $gpa = $StudentInfo['GPA'];
+        $major = $StudentInfo['Major'];
+        $minor1 = $StudentInfo['Minor_1'];
+        $minor2 = $StudentInfo['Minor_2'];
+        $exp_grad = $StudentInfo['Expected_Graduation'];
+        $school = $StudentInfo['School'];
+        $curr_class = $StudentInfo['Current_Classification'];
+        $student_type = $StudentInfo['Student_Type'];
+        $phone = $StudentInfo['Phone'];
 
         
 

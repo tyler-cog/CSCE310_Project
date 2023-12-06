@@ -104,6 +104,38 @@
         return $row;
     }
 
+    function SELECT_ViewStudent($uin){
+        include "../connection.php";
+
+        $sql_query = "
+            CREATE OR REPLACE VIEW `ViewStudent` AS
+            SELECT u.First_Name, u.M_Initial, u.Last_Name, u.Username, u.Password, u.User_Type, u.Email, u.Discord_Name, c.*
+            FROM user u
+            LEFT JOIN college_student c ON u.UIN = c.UIN
+        ";
+
+        $result = $db_conn->query($sql_query);
+
+        if (!$result) {
+            die("Query failed: " . $conn->error);
+        }
+
+        $sql_query = "SELECT * FROM ViewStudent WHERE UIN = '$uin'";
+        $result = $db_conn->query($sql_query);
+
+        if (!$result) {
+            die("Query failed: " . $db_conn->error);
+        }
+
+
+       $row = $result->fetch_assoc();
+
+       return $row;
+    }
+        
+        
+    
+
     function UPDATE_CollegeStudent($uin, $gender, $hispanic_latino, $race, $us_citizen, $first_generation, 
     $dob, $gpa, $major, $minor1, $minor2, $expected_graduation, 
     $school, $current_classification, $student_type, $phone){
@@ -111,9 +143,9 @@
 
         $sql_query = "UPDATE college_student
                     SET Gender = '$gender',
-                        `Hispanic/Latino` = UNHEX('$hispanic_latino'),
+                        `Hispanic_Latino` = UNHEX('$hispanic_latino'),
                         Race = '$race',
-                        `U.S._Citizen` = UNHEX('$us_citizen'),
+                        `US_Citizen` = UNHEX('$us_citizen'),
                         First_Generation = UNHEX('$first_generation'),
                         DoB = '$dob',
                         GPA = '$gpa',
