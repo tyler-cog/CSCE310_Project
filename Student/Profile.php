@@ -30,7 +30,8 @@
     $student_type = $CollegeStudentInfo['Student_Type'];
     $phone = $CollegeStudentInfo['Phone'];
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['Update'])) {
+        echo "updated";
         $first_name = $_POST['first_name'];
         $m_initial = $_POST['m_initial'];
         $last_name = $_POST['last_name'];
@@ -83,8 +84,16 @@
 
             header("Location: Profile.php");
             exit();
-            
+    
         }
+    }
+
+    else if (isset($_POST['Deactivate'])){
+        
+        UPDATE_User($uin, $first_name, $m_initial, $last_name, $username, $password, "Inact_Student", $email, $discord_name);
+
+        header("Location: ../LoginPage/LoginPage.php");
+        exit();
     }
 ?>
 
@@ -278,9 +287,8 @@
                         <label>Password</label>
                         <input class="textField" type="text" name="password" value="<?php echo htmlspecialchars($password); ?>" required>
                     </div>
-                    <input class="submitBtn" type="submit" value="Update">
-                    
-                
+                    <input class="submitBtn" type="submit" value="Update" name="Update">
+                    <input class="submitBtn" type="submit" value="Deactivate" name="Deactivate">
                 </form>
             </div>
         </div>

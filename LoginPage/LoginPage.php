@@ -45,6 +45,13 @@
                                     header("Location: ../Admin/AdminHome.php");
                                     exit();
                                 }
+
+                                else {
+                                    echo '<div class="withError"> 
+                                        <div class="errorMessage">Incorrect Username or Password</div>
+                                    </div>';
+
+                                }
                             }
 
                             else {

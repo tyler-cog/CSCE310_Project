@@ -57,5 +57,7 @@
                 return "Admin";
             }
         }
+
+        return "Inact_Student";
     }
 ?>
