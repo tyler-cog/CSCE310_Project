@@ -64,7 +64,10 @@
         <div class="studentSelection">
             <!-- This calls the adminCourseEnrollment function from the helper php file -->
             <?php
-                adminCourseEnrollment($_SESSION["UIN"]);
+                if(array_key_exists('UIN',$_SESSION)){
+                    adminCourseEnrollment($_SESSION["UIN"]);
+                }
+                
             ?>
 
             <br>
@@ -102,7 +105,9 @@
         <div class="studentSelection">
             <!-- This calls the adminCertifications function from the helper php file -->
             <?php
-                adminCertifications($_SESSION["UIN"]);
+                if(array_key_exists('UIN',$_SESSION)){
+                    adminCertifications($_SESSION["UIN"]);
+                }
             ?>
             <br>
 
@@ -146,7 +151,9 @@
         <h2>INTERNSHIPS</h2>
         <!-- This calls the adminInternships function from the helper php file -->
         <?php
-            adminInternships($_SESSION["UIN"]);
+            if(array_key_exists('UIN',$_SESSION)){
+                adminInternships($_SESSION["UIN"]);
+            }
         ?>
         <br>
 
@@ -180,7 +187,9 @@
         <h2>PROGRAMS</h2>
         <!-- This calls the adminPrograms function from the helper php file -->
         <?php
-            adminPrograms($_SESSION["UIN"]);
+            if(array_key_exists('UIN',$_SESSION)){
+                adminPrograms($_SESSION["UIN"]);
+            }
         ?>
 
         <br>

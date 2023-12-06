@@ -27,8 +27,16 @@
             <div class="applicationTables">
                 <h2>Review, Edit, and Delete Applications</h2>
                 <br>
+                <form method="POST"> 
+                    <input type="submit" name="refresh" class="button" value="Refresh" /> 
+                </form> 
                 <?php
-                    displayApplicationsTable();
+                    if(array_key_exists('refresh', $_POST)) {
+                        displayApplicationsTable();
+                    }
+                    else {
+                        displayApplicationsTable();
+                    }
                 ?>
             </div>
             

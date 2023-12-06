@@ -1,7 +1,5 @@
-<!-- TODO
-Could add dropdown menu for Users application, tried but couldnt get it right
-Currently cant add other docs that arent in Application is that ok? - if not in apps cant add anything
--->
+// Code Written By: Tyler Roosth
+
 
 <?php
     $doc_num = "";

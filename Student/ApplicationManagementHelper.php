@@ -82,7 +82,6 @@
     function insertApplication() {
         include "../connection.php";
 
-        session_start();
         $username = $_SESSION['username'];
         $UIN = $db_conn->query("SELECT UIN FROM user WHERE Username='$username'")->fetch_assoc()['UIN'];
 

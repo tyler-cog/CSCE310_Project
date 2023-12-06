@@ -156,30 +156,5 @@
 
 
     </div>
-
-    <div class="section">
-        <h2>PROGRAMS</h2>
-        <!-- This calls the studentPrograms function from the helper php file -->
-        <?php
-            studentPrograms($UIN);
-        ?>
-
-        <br>
-        <!-- Insert form for adding program track that queries the database on submit -->
-        <form class="Programs" action="ProgramProgress.php" method="POST">
-
-            <?php
-                echo "<td><input type='hidden' name='Program_UINInsert' value='" . $UIN . "'></td>";
-            ?>
-            
-            <label>Program Name:</label>
-            <input type="text" id="Program_Program_NameInsert" name="Program_Program_NameInsert">
-
-            <input type='hidden' name='InsertProgram' value='insertProgram'>
-
-            <input type="submit" value="Submit">
-        </form>
-
-    </div>
 </body>
 </html>

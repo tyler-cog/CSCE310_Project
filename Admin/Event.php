@@ -1,3 +1,5 @@
+// Code Written By: Tyler Roosth
+
 <?php
     $uin = "";
     $event_id = "";
@@ -46,23 +48,6 @@
                         <input class="textField" type="time" name="event_time" value="<?php echo htmlspecialchars($event_time); ?>" >
                     </div> 
                     <div class="thirdInputBox">
-                        <?php
-                            // require_once "EventHelper.php";
-                            // if (isset($_POST['uin'])) {
-                            //     if (!validUIN($_POST['uin'])){
-                            //         echo '<div class="withError">
-                            //                 <div class="errorMessage">UIN already taken or invalid</div>
-                            //             </div>';
-                            //     }
-                            //     else {
-                            //         echo '<div class="noError"></div>';
-                            //     }
-                            // }
-
-                            // else {
-                            //     echo '<div class="noError"></div>';
-                            // }
-                        ?>
                         <label>Organizer UIN</label>
                         <input class="textField" type="number" name="uin" step="1" value="<?php echo htmlspecialchars($uin); ?>" >
                     </div>
@@ -83,7 +68,7 @@
                     </div>
                     <div class="thirdInputBox">
                         <div class="noError"></div>
-                        <label>Program Number</label>
+                        <label>Program Name</label>
                         <input class="textField" type="text" name="program_num" value="<?php echo htmlspecialchars($program_num); ?>" >
                     </div>
                     <div class="thirdInputBox">
@@ -93,32 +78,6 @@
                     </div>
                     <div class="greyDivider"></div>
 
-                    <!-- <div class="halfInputBox">
-                        <?php
-                            // require_once "EventHelper.php";
-                            // if (isset($_POST['username'])) {
-                            //     if (!validUsername($_POST['username'])){
-                            //         echo '<div class="withError">
-                            //                 <div class="errorMessage">Username already taken</div>
-                            //             </div>';
-                            //     }
-                            //     else {
-                            //         echo '<div class="noError"></div>';
-                            //     }
-                            // }
-
-                            // else {
-                            //     echo '<div class="noError"></div>';
-                            // }
-                        ?>
-                        <label>Username</label>
-                        <input class="textField" type="text" name="username" value="<?php echo htmlspecialchars($username); ?>" >
-                    </div>
-                    <div class="halfInputBox">
-                        <div class="noError"></div>
-                        <label>Password</label>
-                        <input class="textField" type="password" name="password" value="<?php echo htmlspecialchars($password); ?>" >
-                    </div>-->
                     <input class="submitBtn" type="submit" name="create_event" value="Create"> 
                     <input class="submitBtn" type="submit" name="update_event"value="Update">
                     <input class="submitBtn" type="submit" name="search_event" value="Search"> 
@@ -140,19 +99,40 @@
                         $num_attend = $_POST['num_attend'];
                  
                         if (isset($_POST['create_event'])){
-                            INSERT_Event($event_id, $uin, $program_num, $start_date, $event_time, $location, $end_date, $event_type, $num_attend);
-                            INSERT_tracking($uin, $num_attend);
+                            if (validProgramName($_POST['program_num'])) {
+                                if (validUIN($_POST['uin'])) {
+                                    INSERT_Event($event_id, $uin, $program_num, $start_date, $event_time, $location, $end_date, $event_type, $num_attend);
+                                } else {
+                                    echo '<div class="withError">
+                                            <div class="errorMessage">UIN is invalid</div>
+                                            </div>';
+                                }
+                            } else {
+                                echo '<div class="withError">
+                                        <div class="errorMessage">Program Name is invalid</div>
+                                        </div>';
+                            }
                             echo displayEventsTable();
                         }
                         else if (isset($_POST['update_event'])){
-                            if (validEventID($_POST['event_id'])){
-                                UPDATE_Event($event_id, $uin, $program_num, $start_date, $event_time, $location, $end_date, $event_type);
-                                UPDATE_tracking($uin, $event_id, $num_attend); 
-                            }
-                            else{
+                            if (validEventID($_POST['event_id'])) {
+                                if (validProgramName($_POST['program_num'])) {
+                                    if (validUIN($_POST['uin'])) {
+                                        UPDATE_Event($event_id, $uin, $program_num, $start_date, $event_time, $location, $end_date, $event_type, $num_attend);
+                                    } else {
+                                        echo '<div class="withError">
+                                                <div class="errorMessage">UIN is invalid</div>
+                                              </div>';
+                                    }
+                                } else {
+                                    echo '<div class="withError">
+                                            <div class="errorMessage">Program Name is invalid</div>
+                                          </div>';
+                                }
+                            } else {
                                 echo '<div class="withError">
-                                        <div class="errorMessage">Current Event ID is invalid</div>
-                                    </div>';
+                                        <div class="errorMessage">Event ID is invalid</div>
+                                      </div>';
                             }
                             echo displayEventsTable();
                         }
@@ -170,17 +150,6 @@
                             }
                             echo displayEventsTable();
                         }
-
-                        //header("Location: ../Admin/AdminHome.php");
-                        //exit();
-
-                        // if (validUIN($_POST['uin']) && validUsername($_POST['username'])){
-
-                        //     INSERT_User($uin, $first_name, $m_initial, $last_name, $username, $password, "Admin", $email, $discord_name);
-
-                        //     header("Location: ../LoginPage/LoginPage.php");
-                        //     exit();
-                        // }
                     }
                 ?>
 
