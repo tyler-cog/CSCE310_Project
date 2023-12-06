@@ -1,6 +1,5 @@
+<!-- Code written by Gian Inguillo -->
 <?php
-
-
     function validGPA($gpa){
         $gpa = (float)$gpa;
 

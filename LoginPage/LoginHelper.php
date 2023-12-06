@@ -1,3 +1,4 @@
+<!-- Code written by Gian Inguillo -->
 <?php
     function isValidUsernameLogin($username, $password){
         include "../connection.php";

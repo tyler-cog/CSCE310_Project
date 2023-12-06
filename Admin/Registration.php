@@ -1,3 +1,4 @@
+<!-- Code written by Gian Inguillo -->
 <?php
     require_once "RegistrationHelper.php";
 

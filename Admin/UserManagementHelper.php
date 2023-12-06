@@ -1,3 +1,4 @@
+<!-- Code written by Gian Inguillo -->
 <?php
     function SELECT_All_Users(){
         include "../connection.php";

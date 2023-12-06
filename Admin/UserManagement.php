@@ -1,3 +1,4 @@
+<!-- Code written by Gian Inguillo -->
 <?php
     require_once "../Student/ProfileHelper.php";
     require_once "UserManagementHelper.php";
@@ -243,22 +244,15 @@
 
                             // If user is an Admin
                             if ($user["User_Type"] == "Admin"){
-                                echo "Admin Editing " . $UINView;
                                 PersonalProfileView($UINView);
-                                
                             }
 
                             // If user is a student
                             else {
-                                echo "Student Editing " . $UINView;
                                 ProfileView($UINView);
-                                
-                                }
+                            }
                         }
                     }
-
-                    
-
                 ?>
             </div>
         </div>

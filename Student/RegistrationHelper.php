@@ -1,3 +1,4 @@
+<!-- Code written by Gian Inguillo -->
 <?php
     function validUIN($uin){
         include "../connection.php";
