@@ -24,7 +24,7 @@
     }
 
     else if (isset($_POST['AdminViewDelete'])){
-        DELETE_Admin($_POST['uin']);
+        DELETE_User($_POST['uin']);
 
         header("Location: ../LoginPage/LoginPage.php");
         exit();
@@ -155,7 +155,16 @@
     }
 
     else if (isset($_POST['UINViewDelete'])){
-
+        $uin = $_POST['uin'];
+        
+        DELETE_ApplicationWithDocument($uin);
+        DELETE_EventTrackingwithEvent($uin);
+        DELETE_Track($uin);
+        DELETE_ClassEnrollment($uin);
+        DELETE_InternApp($uin);
+        DELETE_CertEnrollment($uin);
+        DELETE_CollegeStudent($uin);
+        DELETE_User($uin);
     }
     
 ?>

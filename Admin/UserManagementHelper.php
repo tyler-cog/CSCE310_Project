@@ -28,11 +28,121 @@
         
     }
 
-    function DELETE_Student($uin){
+    function DELETE_ApplicationWithDocument($uin){
+        include "../connection.php";
 
+        $sql_query = "SELECT * FROM application WHERE UIN = '$uin'";
+        $result = $db_conn->query($sql_query);
+
+        if (!$result) {
+            die("Query failed: " . $db_conn->error);
+        }
+
+        $appNums = array();
+
+        while ($row = $result->fetch_assoc()) {
+            array_push($appNums, $row['App_Num']);
+        }
+
+        $db_conn->begin_transaction();
+
+        // Go through each app number and delete the Document
+        for ($i = 0; $i < count($appNums); $i++) {
+            $sql_query = "DELETE FROM document WHERE App_Num = '$appNums[$i]'";
+            $result = $db_conn->query($sql_query);
+
+            if (!$result) {
+                die("Query failed: " . $db_conn->error);
+            }
+        }
+
+        $sql_query = "DELETE FROM application WHERE UIN = '$uin'";
+        $result = $db_conn->query($sql_query);
+
+        if (!$result) {
+            die("Query failed: " . $db_conn->error);
+        }
+
+        $db_conn->commit();
     }
 
-    function DELETE_Admin($uin){
+    function DELETE_EventTrackingwithEvent($uin){
+        include "../connection.php";
+
+        $db_conn->begin_transaction();
+
+        $sql_query = "DELETE FROM event_tracking WHERE UIN = '$uin'";
+        $result = $db_conn->query($sql_query);
+
+        if (!$result) {
+            die("Query failed: " . $db_conn->error);
+        }
+
+        $sql_query = "DELETE FROM event WHERE UIN = '$uin'";
+        $result = $db_conn->query($sql_query);
+
+        if (!$result) {
+            die("Query failed: " . $db_conn->error);
+        }
+
+
+        $db_conn->commit();    
+    }
+
+    function DELETE_Track($uin){
+        include "../connection.php";
+
+        $sql_query = "DELETE FROM track WHERE UIN = '$uin'";
+        $result = $db_conn->query($sql_query);
+
+        if (!$result) {
+            die("Query failed: " . $db_conn->error);
+        }
+    }
+
+    function DELETE_ClassEnrollment($uin){
+        include "../connection.php";
+        $sql_query = "DELETE FROM class_enrollment WHERE UIN = '$uin'";
+        $result = $db_conn->query($sql_query);
+
+        if (!$result) {
+            die("Query failed: " . $db_conn->error);
+        }
+    }
+
+
+    function DELETE_InternApp($uin){
+        include "../connection.php";
+        $sql_query = "DELETE FROM intern_app WHERE UIN = '$uin'";
+        $result = $db_conn->query($sql_query);
+
+        if (!$result) {
+            die("Query failed: " . $db_conn->error);
+        }
+    }
+
+
+    function DELETE_CertEnrollment($uin){
+        include "../connection.php";
+        $sql_query = "DELETE FROM cert_enrollment WHERE UIN = '$uin'";
+        $result = $db_conn->query($sql_query);
+
+        if (!$result) {
+            die("Query failed: " . $db_conn->error);
+        }
+    }
+
+    function DELETE_CollegeStudent($uin){
+        include "../connection.php";
+        $sql_query = "DELETE FROM college_student WHERE UIN = '$uin'";
+        $result = $db_conn->query($sql_query);
+
+        if (!$result) {
+            die("Query failed: " . $db_conn->error);
+        }
+    }
+
+    function DELETE_User($uin){
         include "../connection.php";
         $sql_query = "DELETE FROM user WHERE UIN = '$uin'";
         $result = $db_conn->query($sql_query);
