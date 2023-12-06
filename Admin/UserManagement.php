@@ -1,5 +1,6 @@
 <?php
     require_once "../Student/ProfileHelper.php";
+    require_once "UserManagementHelper.php";
 
     if (isset($_POST['AdminViewUpdate'])){
         $first_name = $_POST['first_name'];
@@ -23,7 +24,10 @@
     }
 
     else if (isset($_POST['AdminViewDelete'])){
+        DELETE_Admin($_POST['uin']);
 
+        header("Location: ../LoginPage/LoginPage.php");
+        exit();
     }
     
     // Code that runs if there is an update

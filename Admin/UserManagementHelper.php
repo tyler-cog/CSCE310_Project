@@ -33,7 +33,13 @@
     }
 
     function DELETE_Admin($uin){
+        include "../connection.php";
+        $sql_query = "DELETE FROM user WHERE UIN = '$uin'";
+        $result = $db_conn->query($sql_query);
 
+        if (!$result) {
+            die("Query failed: " . $db_conn->error);
+        }
     }
 
     function PersonalProfileView($UINView){
